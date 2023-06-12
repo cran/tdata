@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Time and Data</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Time and Data</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tdata)</span></code></pre></div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this vignette, I will introduce you to the main features of the
+<code>tdata</code> package. I will use various datasets to demonstrate
+how to perform common tasks, such as defining frequency types and
+converting data between frequencies.</p>
+<p><em>Please note that currently, only one section is provided in this
+vignette. Additional examples will be added in subsequent
+updates.</em></p>
+<p>Let’s get started!</p>
+</div>
+<div id="oil-price" class="section level2">
+<h2>Oil Price</h2>
+<p>In the first example, I will use oil price data. The required data
+can be downloaded from the <code>Quandl</code> package using the
+following code (Note that the end date in this example may differ from
+yours):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>oil_price <span class="ot">&lt;-</span> Quandl<span class="sc">::</span><span class="fu">Quandl</span>(<span class="st">&quot;OPEC/ORB&quot;</span>, <span class="at">start_date=</span><span class="st">&quot;2010-01-01&quot;</span>)</span></code></pre></div>
+<div id="create-a-variable" class="section level3">
+<h3>1. Create a Variable</h3>
+<p>To manipulate data using the <code>tdata</code> package, we generally
+need to create a variable. In this example, we’ll create a variable from
+the oil price data. First, we’ll use the values in the first column to
+define a frequency. Since the first column contains a list of dates,
+we’ll use a ‘List-Date’ frequency:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>start_freq <span class="ot">&lt;-</span> <span class="fu">f.list.date</span>(oil_price<span class="sc">$</span>Date)</span></code></pre></div>
+<p>Now that we have defined the frequency, we can create a variable
+using the following code:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>var_dl <span class="ot">&lt;-</span> <span class="fu">variable</span>(oil_price<span class="sc">$</span>Value, start_freq, <span class="st">&quot;Oil Price&quot;</span>)</span></code></pre></div>
+<p>This creates an array where each element is labeled by a date. We can
+print this variable using the <code>print</code> function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var_dl)</span></code></pre></div>
+<pre><code>## Variable:
+##     Name = Oil Price
+##     Length = 3466
+##     Frequency Class = List (Date): Ld
+##     Start Frequency = 20230608
+##     Fields: NULL</code></pre>
+<p>We can also convert the variable back to a data.frame using the
+<code>as.data.frame</code> function:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_var_dl <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(var_dl)</span></code></pre></div>
+</div>
+<div id="daily-variable" class="section level3">
+<h3>2. Daily Variable</h3>
+<p>In this section, we’ll convert <code>var_dl</code> to a daily
+variable. This can be done by sorting the data and filling in any gaps.
+The <code>convert.to.daily</code> function can do this for us:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var_daily <span class="ot">&lt;-</span> <span class="fu">convert.to.daily</span>(var_dl)</span></code></pre></div>
+<p>Using this function is more efficient than manually sorting the data
+and filling in gaps because <code>var_daily</code>, as a daily variable,
+only stores a single date: the frequency of the first observation. Other
+frequencies (or dates) are inferred from this first date (except for
+‘Lists’, this is true for other types of frequencies in the
+<code>tdata</code> package). We can print the starting frequency using
+the print function:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var_daily<span class="sc">$</span>startFrequency)</span></code></pre></div>
+<pre><code>## Frequency: 20100104 (Daily: d)</code></pre>
+<p>Each frequency in the <code>tdata</code> package has a string
+representation and a class ID. We can get these values using the
+following code:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>class_id <span class="ot">&lt;-</span> <span class="fu">get.class.id</span>(var_daily<span class="sc">$</span>startFrequency)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>str_rep <span class="ot">&lt;-</span> <span class="fu">as.character</span>(var_daily<span class="sc">$</span>startFrequency)</span></code></pre></div>
+<pre><code>## [1] &quot;class_id: d, str_rep: 20100104&quot;</code></pre>
+<p>Plotting the data is straightforward. We simply convert the data to a
+<code>data.frame</code> using the <code>as.data.frame</code> function
+and then plot it. However, I won’t plot the daily variable in this
+example because, since the original data was a ‘List-Date’, there are
+many <code>NA</code> values. In the next section, I’ll aggregate the
+data and plot it.</p>
+</div>
+<div id="weekly-variable" class="section level3">
+<h3>3. Weekly Variable</h3>
+<p>In this section, we’ll convert the daily variable to a weekly
+variable. Unlike the previous conversion, this involves aggregating the
+data rather than sorting and filling in gaps. To do this, we’ll need to
+use an aggregator function that takes an array of data as an argument
+and returns a scalar value. Summary statistic functions such as
+<code>mean</code> and <code>median</code> are natural choices for this
+(we’ll also need to handle <code>NA</code> values). In this example,
+I’ll use a built-in function to get the last available data point in
+each week as the representative value for that week. Here’s the
+code:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>var_weekly <span class="ot">&lt;-</span> <span class="fu">convert.to.weekly</span>(var_daily, <span class="st">&quot;mon&quot;</span>, <span class="st">&quot;last&quot;</span>)</span></code></pre></div>
+<p>The second argument, <code>&quot;mon&quot;</code>, specifies that the week
+starts on Monday. Note that the weekly frequency points to the first day
+of the week. We can now convert the variable to a
+<code>data.frame</code> and plot it using the following code:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_var_weekly <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(var_weekly)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">las =</span> <span class="dv">2</span>, <span class="at">cex.axis =</span> <span class="fl">0.8</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">factor</span>(<span class="fu">rownames</span>(df_var_weekly)), </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>     df_var_weekly<span class="sc">$</span><span class="st">`</span><span class="at">Oil Price</span><span class="st">`</span>, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="cn">NULL</span>, <span class="at">ylab =</span> <span class="st">&quot;$&quot;</span>, </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Weekly Oil Price&quot;</span>)</span></code></pre></div>
+<div class="figure">
+<img src="data:image/png;base64,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" alt />
+<p class="caption">Plotting the generated weekly data</p>
+</div>
+<p>There are other frequency types and conversion functions available in
+the <code>tdata</code> package that you can explore on your own.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
