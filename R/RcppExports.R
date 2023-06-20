@@ -113,6 +113,18 @@
     .Call('_tdata_Sequence_F', PACKAGE = 'tdata', from, to, by)
 }
 
+.F_GetClass <- function(name) {
+    .Call('_tdata_F_GetClass', PACKAGE = 'tdata', name)
+}
+
+.F_Next <- function(freq, steps) {
+    .Call('_tdata_F_Next', PACKAGE = 'tdata', freq, steps)
+}
+
+.F_Minus <- function(freq1, freq2) {
+    .Call('_tdata_F_Minus', PACKAGE = 'tdata', freq1, freq2)
+}
+
 .Get_Descriptive <- function(w, type, skipNAN) {
     .Call('_tdata_Get_Descriptive', PACKAGE = 'tdata', w, type, skipNAN)
 }

@@ -13,41 +13,32 @@ remove.na.strategies(
 )
 }
 \arguments{
-\item{data}{A matrix that contains \code{NA}.}
+\item{data}{A matrix that contains \code{NA} values.}
 
-\item{countFun}{A function to determine how strategies are
-sorted. Default function counts the number of observations.
-You might want to give columns a higher level of importance
-for example by using \code{nRows*nCols^1.5}.}
+\item{countFun}{A function to determine how strategies are sorted. The default function counts the number of observations.
+You might want to give columns a higher level of importance, for example, by using \code{nRows*nCols^1.5}.}
 
-\item{rowIndices}{Indices of the sorted rows to search.
-Use it to create jumps for large number of rows (E.g.,
-if the first sorted strategies suggest small number of
-columns and you are looking for other strategies).
+\item{rowIndices}{The indices of the sorted rows to search.
+Use this to create jumps for a large number of rows (e.g., if the first sorted strategies suggest a small number of columns and you are looking for other strategies).
 Use \code{NULL} to disable it.}
 
-\item{colIndices}{Similar to \code{rowIndices} for columns.}
+\item{colIndices}{Similar to \code{rowIndices}, but for columns.}
 
 \item{printMsg}{If \code{TRUE}, it prints the progress.}
 }
 \value{
 A list of lists, each with the following elements:
-\tabular{ll}{
-\code{nRows} \tab number of rows in the matrix.\cr
-\code{nCols} \tab number of cols in the matrix.\cr
-\code{colFirst} \tab whether to remove columns or rows first.\cr
-\code{colRemove} \tab indexes of the columns to be removed.\cr
-\code{rowRemove} \tab indexes of the rows to be removed.
-}
+\item{nRows}{The number of rows in the matrix.}
+\item{nCols}{The number of columns in the matrix.}
+\item{colFirst}{Whether to remove columns or rows first.}
+\item{colRemove}{The indices of the columns to be removed.}
+\item{rowRemove}{The indices of the rows to be removed.}
 }
 \description{
-Use this to remove \code{NA} from a matrix. You can optimize the size of information by this method.
+Use this function to remove \code{NA} values from a matrix. This helps you to optimize the size of the information.
 }
 \details{
-When a matrix has \code{NA}, one can omit columns
-with \code{NA}, rows with \code{NA}, or a combination of
-these two. The total number of observations is a function
-of the order. This function tries all combinations and returns the results.
+When a matrix has \code{NA} values, one can omit columns with \code{NA}, rows with \code{NA}, or a combination of these two. The total number of observations is a function of the order. This function tries all combinations and returns the results.
 }
 \examples{
 data <- matrix(c(NA, 2, 3, 4, NA, 5, NA, 6, 7, NA, 9, 10, 11, 12, 13, 14, 15, NA, 16, 17), 4, 5)

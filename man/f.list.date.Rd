@@ -2,36 +2,32 @@
 % Please edit documentation in R/frequency.R
 \name{f.list.date}
 \alias{f.list.date}
-\title{Creates an \code{List-Date} Frequency}
+\title{Create a \code{List-Date} Frequency}
 \usage{
-f.list.date(items, value = NULL, reformat = TRUE, asDateFun = NULL)
+f.list.date(items, value = NULL, reformat = TRUE)
 }
 \arguments{
-\item{items}{Items of the list in \code{YYYYMMDD} format.}
+\item{items}{The items in the list in \code{YYYYMMDD} format.}
 
-\item{value}{Current value in \code{YYYYMMDD} format. If null, the first value in \code{items} is used.}
+\item{value}{The current value in \code{YYYYMMDD} format. If null, the first value in \code{items} is used.}
 
-\item{reformat}{If the elements of \code{items} is not in the given format, set it to be \code{TRUE}.}
-
-\item{asDateFun}{If given and \code{reformat} is \code{TRUE}, it will be used in converting the strings to the required format.}
+\item{reformat}{If the elements of \code{items} are not in \code{YYYYMMDD} format, set this to be \code{TRUE}.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{items} \tab Determines the \code{items}.\cr
-\code{value} \tab Determines the \code{value}.
-}
+An object of class \code{ldtf}. It is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{items}{Determines the \code{items}.}
+\item{value}{Determines the \code{value}.}
 }
 \description{
-Use this frequency for data with date labels. It is generally a list of dates, but it can be used to label observations outside this list.
+Use this frequency for data with date labels. It is generally a list of dates, but it can also be used to label observations outside this list.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} \code{"YYYYMMDD"} (i.e., \code{item})
-\item \strong{Class Id} \code{Ld} or \code{Ld:...} (in which '...' is the semi-colon separated \code{items})
+\item \strong{Character Format}: \code{"YYYYMMDD"} (i.e., the \code{item})
+\item \strong{Class Id}: \code{Ld} or \code{Ld:...} (where '...' represents the semi-colon-separated \code{items})
 }
 }
 \examples{

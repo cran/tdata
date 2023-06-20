@@ -2,7 +2,7 @@
 % Please edit documentation in R/variable.R
 \name{bind.variables}
 \alias{bind.variables}
-\title{Binds Variables}
+\title{Bind Variables and Create a Data.frame}
 \usage{
 bind.variables(
   varList,
@@ -13,32 +13,29 @@ bind.variables(
 )
 }
 \arguments{
-\item{varList}{A list of variables ((i.e., \code{ldtv} objects)) with similar frequency class.}
+\item{varList}{A list of variables (i.e., \code{ldtv} objects) with similar frequency class.}
 
 \item{interpolate}{If \code{TRUE}, missing observations are interpolated.}
 
 \item{adjustLeadLags}{If \code{TRUE}, leads and lags are adjusted with respect to the first variable.}
 
-\item{numExo}{(integer) This is the number of exogenous variables.}
+\item{numExo}{An integer representing the number of exogenous variables.}
 
-\item{horizon}{(integer) If \code{adjustLeadLags} is \code{TRUE} and there is exogenous variables,
-this determines the required length of out-of-sample data. It creates lag of exogenous variables
-or omits \code{NaN}s to make data available.}
+\item{horizon}{An integer representing the required length of out-of-sample data if \code{adjustLeadLags} is \code{TRUE} and there are exogenous variables.
+It creates lags of exogenous variables or omits \code{NaN}s to make data available.}
 }
 \value{
 A list with the following members:
-\itemize{
-\item \strong{data:} (numeric matrix) Final data after the requested fixes. It is a matrix with variables in the columns and frequencies as the row names.
-\item \strong{info:} (integer matrix) Information about the columns of the final data. E.g., Range of data, missing data, lags/leads, etc.
-\item \strong{startFrequency:} Start frequency of data.
-\item \strong{startClass:} frequency class of the data.
-}
+\item{data}{A numeric matrix representing the final data after the requested fixes. It is a matrix with variables in the columns and frequencies as the row names.}
+\item{info}{An integer matrix containing information about the columns of the final data, such as range of data, missing data, lags/leads, etc.}
+\item{startFrequency}{The start frequency of the data.}
+\item{startClass}{The frequency class of the data.}
 }
 \description{
-Use this to bind variables with the same class of frequency together.
+Use this function to bind variables with the same class of frequency together.
 }
 \examples{
-v1 = variable(c(1,2,3,2,3,4,5),f.monthly(2022,12),"V1", list())
-v2 = variable(c(10,20,30,20,30,40,50),f.monthly(2022,8),"V2", list())
+v1 = variable(c(1,2,3,2,3,4,5),f.monthly(2022,12),"V1")
+v2 = variable(c(10,20,30,20,30,40,50),f.monthly(2022,8),"V2")
 L = bind.variables(list(v1,v2))
 }

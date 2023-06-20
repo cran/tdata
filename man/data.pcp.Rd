@@ -7,13 +7,13 @@
 data.pcp(dirPath, makeReal = FALSE)
 }
 \arguments{
-\item{dirPath}{path to the downloaded data data.}
+\item{dirPath}{A character string representing the path to the downloaded data directory.}
 
-\item{makeReal}{uses the first column (which must be US-CPI) and converts nominal variables to real. If \code{TRUE}, \code{dirPath} must also contain a file with the US CPI.}
+\item{makeReal}{A logical value indicating whether to convert nominal variables to real using the first column (which must be US-CPI). If \code{TRUE}, \code{dirPath} must also contain a file with the US CPI.}
 }
 \value{
 A list with data, descriptions, etc.
 }
 \description{
-Use it to load the 'IMF's Primary Commodity Prices' dataset and create Date-Series table.
+Use this function to load the 'IMF's Primary Commodity Prices' dataset and create a Date-Series table.
 }

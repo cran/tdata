@@ -15,50 +15,47 @@ data.berka.loan(
 )
 }
 \arguments{
-\item{dirPath}{Path to the downloaded data directory.}
+\item{dirPath}{A character string representing the path to the downloaded data directory.}
 
-\item{positive}{Determines the positive class. There are four types of loans:
+\item{positive}{A character value determining the positive class. There are four types of loans:
 'A' stands for contract finished, no problems, 'B' stands for contract finished,
-loan not payed, 'C' stands for running contract, OK so far, 'D' stands
+loan not paid, 'C' stands for running contract, OK so far, 'D' stands
 for running contract, client in debt.}
 
 \item{negative}{Similar to \code{positive} for negative class.}
 
-\item{rateFun}{A function to calculate interest rate in loans. Its arguments are: \code{amount}, \code{duration}, \code{paymentPerMonth}.}
+\item{rateFun}{A function to calculate interest rate in loans with the following arguments: \code{amount}, \code{duration}, \code{paymentPerMonth}.}
 }
 \value{
 A data.frame with the following columns:
-\tabular{ll}{
-\code{loan_id} \tab record identifier \cr
-\code{status} \tab original status of the data (A, B, C, or D) \cr
-\code{label} \tab status of paying off the loan transformed to numeric (0,1) by using \code{positive} and \code{negative} arguments. value=1 means default. \cr
-\code{amount} \tab amount of money \cr
-\code{payments} \tab monthly payments \cr
-\code{rate} \tab rates calculated by \code{rateFun} function \cr
-\code{duration_# (#=12,24,36,48,60)} \tab dummy variables for the duration of the loan \cr
-\code{account_frequency_?} \tab dummy variables for the frequency of issuance of statements. ?="POPLATEK MESICNE" stands for monthly issuance, ?="POPLATEK TYDNE" stands for weekly issuance, ?="POPLATEK PO OBRATU" stands for issuance after transaction \cr
-\code{order_num} \tab number of the payment orders issued for the account of the loan \cr
-\code{order_sum_amount} \tab sum of amounts of the payment orders issued for the account of the loan \cr
-\code{order_related_account_num} \tab unique number of 'account of the recipient' in the payment orders issued for the account of the loan \cr
-\code{order_related_bank_num} \tab unique number of 'bank of the recipient' in the payment orders issued for the account of the loan \cr
-\code{order_has_?} \tab dummy variables fo 'characterization of the payment' in the payment orders issued for the account of the loan \cr
-\code{trans_?num} \tab number of transactions dealt with the account of the loan (in different groups) \cr
-\code{trans_?amount_mean} \tab mean of 'amount of money' in the transactions dealt with the account of the loan (in different groups) \cr
-\code{trans_?amount_div_balance} \tab mean of 'amount of money'/'balance after transaction' in the transactions dealt with the account of the loan (in different groups) \cr
-\code{trans_related_account_num} \tab unique number of 'account of the partner' in the transactions dealt with the account of the loan \cr
-\code{trans_related_account_num} \tab unique number of 'bank of the partner' in the transactions dealt with the account of the loan \cr
-\code{dist_inhabitants_num} \tab no. of inhabitants in the location of the branch of the account of the loan \cr
-\code{dist_muni_#1#2} \tab no. of municipalities with inhabitants #1-#2 in the location of the branch of the account of the loan \cr
-\code{dist_cities_num} \tab no. of cities in the location of the branch of the account of the loan \cr
-\code{dist_ratio_urban_inhabitants} \tab ratio of urban inhabitants in the location of the branch of the account of the loan \cr
-\code{dist_avg_salary} \tab average salary in the location of the branch of the account of the loan \cr
-\code{dist_unemployment95} \tab unemployment rate '95 in the location of the branch of the account of the loan \cr
-\code{dist_unemployment96} \tab unemployment rate '96 in the location of the branch of the account of the loan \cr
-\code{dist_entrepreneurs_num_per1000} \tab no. of entrepreneurs per 1000 inhabitants in the location of the branch of the account of the loan \cr
-\code{dist_crimes95_num} \tab no. of committed crimes '95 in the location of the branch of the account of the loan \cr
-\code{dist_crimes96_num} \tab no. of committed crimes '96 in the location of the branch of the account of the loan
-}
+\item{loan_id}{record identifier}
+\item{status}{original status of the data (A, B, C, or D)}
+\item{label}{status of paying off the loan transformed to numeric (0,1) by using \code{positive} and \code{negative} arguments. value=1 means default.}
+\item{amount}{amount of money}
+\item{payments}{monthly payments}
+\item{rate}{rates calculated by the \code{rateFun} function}
+\item{duration_# (#=12,24,36,48,60)}{dummy variables for the duration of the loan}
+\item{account_frequency_?}{dummy variables for the frequency of issuance of statements. ?="POPLATEK MESICNE" stands for monthly issuance, ?="POPLATEK TYDNE" stands for weekly issuance, ?="POPLATEK PO OBRATU" stands for issuance after transaction.}
+\item{order_num}{number of payment orders issued for the account of the loan.}
+\item{order_sum_amount}{sum of amounts of payment orders issued for the account of the loan.}
+\item{order_related_account_num}{unique number of 'account of the recipient' in payment orders issued for the account of the loan.}
+\item{order_related_bank_num}{unique number of 'bank of the recipient' in payment orders issued for the account of the loan.}
+\item{order_has_?}{dummy variables for 'characterization of the payment' in payment orders issued for the account of the loan.}
+\item{trans_?num}{number of transactions dealt with the account of the loan (in different groups).}
+\item{trans_?amount_mean}{mean of 'amount of money' in transactions dealt with the account of the loan (in different groups).}
+\item{trans_?amount_div_balance}{mean of 'amount of money'/'balance after transaction' in transactions dealt with the account of the loan (in different groups).}
+\item{trans_related_account_num}{unique number of 'account of the partner' in transactions dealt with the account of the loan.}
+\item{dist_inhabitants_num}{number of inhabitants in the location of the branch of the account of the loan.}
+\item{dist_muni_#1#2}{number of municipalities with inhabitants #1-#2 in the location of the branch of the account of the loan.}
+\item{dist_cities_num}{number of cities in the location of the branch of the account of the loan.}
+\item{dist_ratio_urban_inhabitants}{ratio of urban inhabitants in the location of the branch of the account of the loan.}
+\item{dist_avg_salary}{average salary in the location of the branch of the account of the loan.}
+\item{dist_unemployment95}{unemployment rate '95 in the location of the branch of the account of the loan.}
+\item{dist_unemployment96}{unemployment rate '96 in the location of the branch of the account of the loan.}
+\item{dist_entrepreneurs_num_per1000}{number of entrepreneurs per 1000 inhabitants in the location of the branch of the account of the loan.}
+\item{dist_crimes95_num}{number of committed crimes '95 in the location of the branch of the account of the loan.}
+\item{dist_crimes96_num}{number of committed crimes '96 in the location of the branch of the account of the loan.}
 }
 \description{
-Use it to load and combine tables from the ‘Berka’ dataset to create a unified data table.
+Use this function to load and combine tables from the ‘Berka’ dataset to create a unified data table.
 }

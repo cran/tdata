@@ -2,26 +2,26 @@
 % Please edit documentation in R/generics_f.R
 \name{get.seq}
 \alias{get.seq}
-\title{Generates a Sequence from a Range of Frequency}
+\title{Generate a Sequence from a Range of Frequencies}
 \usage{
 get.seq(from, to, by = 1)
 }
 \arguments{
-\item{from}{First frequency of the range.}
+\item{from}{The first frequency of the sequence.}
 
-\item{to}{Last frequency of the range.}
+\item{to}{The last frequency of the sequence.}
 
 \item{by}{An integer that determines the increment of the sequence.}
 }
 \value{
-A list of characters that represents the sequence.
+A list of character strings that represents the sequence.
 }
 \description{
-Use it to generate a list of characters, where each element is a string representation of a frequency within the specified range.
+Use this function to generate a list of character strings, where each element is a string representation of a frequency within the specified range.
 }
 \details{
-The two arguments \code{from} and \code{to} should be a valid frequencies (see \code{f.?} methods).
-Also, they should be consistent. You cannot create a sequence in which one is e.g. monthly, and the other is yearly.
+The two arguments \code{from} and \code{to} should be valid frequencies (see the \code{f.?} functions).
+They should also be consistent; you cannot create a sequence in which one is, for example, monthly and the other is yearly.
 }
 \examples{
 from <- f.monthly(2020,1)

@@ -13,29 +13,27 @@ data.wdi.agg(
 )
 }
 \arguments{
-\item{dirPath}{(character) Path to the WDI dataset directory. It should contain the following files: ‘WDICountry-Series.csv’, ‘WDIData.csv’, ‘WDICountry.csv’, and ‘WDISeries.csv’. These files can be downloaded from the WDI website.}
+\item{dirPath}{A character string representing the path to the WDI dataset directory. It should contain the following files: ‘WDICountry-Series.csv’, ‘WDIData.csv’, ‘WDICountry.csv’, and ‘WDISeries.csv’. These files can be downloaded from the WDI website.}
 
-\item{minYear}{(integer) Starting year for data aggregation.}
+\item{minYear}{An integer representing the starting year for data aggregation.}
 
-\item{maxYear}{(integer) Ending year for data aggregation.}
+\item{maxYear}{An integer representing the ending year for data aggregation.}
 
-\item{aggregateFun}{(function) Aggregation function with the following arguments: \code{data}, \code{code}, \code{name}, \code{unit}, \code{definition}, \code{aggMethod}, where \code{data} is the data-points from \code{minYear} to \code{maxYear}, \code{unit} is the unit of measurement, \code{definition} is the long definition of the series, \code{aggMethod} is the method of aggregation.}
+\item{aggregateFun}{A function for aggregation with the following arguments: \code{data}, \code{code}, \code{name}, \code{unit}, \code{definition}, \code{aggMethod}, where \code{data} is the data-points from \code{minYear} to \code{maxYear}, \code{unit} is the unit of measurement, \code{definition} is the long definition of the series, and \code{aggMethod} is the method of aggregation.}
 
-\item{keepFun}{(function) A Function that determines whether to keep or omit columns of the final data matrix. It has \code{data} argument which is the data of the column. It can check the variance or count the number of available data points and omit a variable from the analysis.}
+\item{keepFun}{A function that determines whether to keep or omit columns of the final data matrix. It has a \code{data} argument which is the data of the column. It can check the variance or count the number of available data points and omit a variable from the analysis.}
 }
 \value{
-A list with the following arguments:
-\tabular{ll}{
-\code{result} \tab A matrix with countries as rows and series as columns. Each data point represents the aggregated value from \code{minYear} to \code{maxYear}. \cr
-\code{countries} \tab A list containing information about the countries. \cr
-\code{series} \tab A list containing information about various series.
-}
+A list with the following items:
+\item{result}{A matrix with countries as rows and series as columns. Each data point represents the aggregated value from \code{minYear} to \code{maxYear}.}
+\item{countries}{A list containing information about the countries.}
+\item{series}{A list containing information about various series.}
 }
 \description{
-Use it to aggregate and reshape data from the World Development Indicators dataset. It creates Creates a 'Country-Series' table.
+Use this function to aggregate and reshape data from the World Development Indicators dataset. It creates a 'Country-Series' table.
 }
 \examples{
-# This example requires external data. Download the data and run them:
+# This example requires external data. Download the data and run it:
 
 \donttest{
 try({
@@ -46,7 +44,7 @@ try({
      if (isPerc) NA
      else get.longrun.growth(data, FALSE, TRUE, 30, 5, isPerc)
    }
-   # Add some rules for removing the variable from the analysis:
+   # Add some rules for removing variables from the analysis:
    keepFun <- function(data) {
         var(data, na.rm = TRUE) > 1e-12 && sum((is.na(data)) == FALSE) >= 50
    }

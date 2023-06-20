@@ -2,35 +2,27 @@
 % Please edit documentation in R/frequency.R
 \name{f.daily}
 \alias{f.daily}
-\title{Creates a Daily Frequency}
+\title{Create a Daily Frequency}
 \usage{
-f.daily(year, month, day, dateString = NULL, asDateFun = NULL)
+f.daily(date)
 }
 \arguments{
-\item{year}{Year of the observation. It should be a valid year as an integer.}
-
-\item{month}{Month of the observation. It should be a valid month of year as an integer.}
-
-\item{day}{Day of the observation. It should be a valid day of month as an integer.}
-
-\item{dateString}{A string that represents a date. If not \code{NULL}, this will be used instead of \code{year}, \code{month}, and \code{day}, and they can be omitted.}
-
-\item{asDateFun}{If \code{dateString} is given, you can use it to convert the string to a \code{Date}. If \code{NULL}, default conversion is used.}
+\item{date}{The date, which can be a list with \code{year}, \code{month}, and \code{day} elements.
+It can also be an integer array with 3 elements for year, month, and day respectively,
+or an object that can be used as an argument for the \code{base::as.Date} function.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{month} \tab Determines the \code{month}.\cr
-\code{day} \tab Determines the \code{day}.
-}
+An object of class \code{ldtf}, which is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{year}{Determines the \code{year}.}
+\item{month}{Determines the \code{month}.}
+\item{day}{Determines the \code{day}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs daily.
+Use this function to create a frequency for time-series data that occurs daily.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+To use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
 \item \strong{Character Format} \code{"YYYYMMDD"} (similar to \code{Weekly})
@@ -39,7 +31,7 @@ you need the following information:
 }
 \examples{
 
-d0 <- f.daily(2023, 1, 2) # This is 2/1/2023. Next observation belongs to 3/1/2023.
+d0 <- f.daily(c(2023, 1, 2)) # This is 2/1/2023. Next observation belongs to 3/1/2023.
 
 d0_value_str <-  as.character(d0) # this will be '20230102'.
 d0_class_str <- get.class.id(d0) # this will be 'd'.

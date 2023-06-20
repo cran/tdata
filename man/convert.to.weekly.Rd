@@ -2,28 +2,28 @@
 % Please edit documentation in R/convert.R
 \name{convert.to.weekly}
 \alias{convert.to.weekly}
-\title{Converts Data to Weekly Data}
+\title{Convert Data to Weekly Frequency}
 \usage{
 convert.to.weekly(variable, weekStart, aggregateFun)
 }
 \arguments{
-\item{variable}{A variable}
+\item{variable}{A variable.}
 
-\item{weekStart}{Determines the start day of the week. It can be \code{sun}, \code{mon}, \code{tue}, \code{wed}, \code{thu}, \code{fri}, and \code{sat}.}
+\item{weekStart}{Determines the start day of the week, can be \code{sun}, \code{mon}, \code{tue}, \code{wed}, \code{thu}, \code{fri}, or \code{sat}.}
 
-\item{aggregateFun}{A function that aggregates the data within each interval.}
+\item{aggregateFun}{Function to aggregate data within each interval.}
 }
 \value{
 A variable with weekly frequency.
 }
 \description{
-Use this to convert time-series data (currently implemented: daily) to time-series data with weekly frequency.
+Use this function to convert time-series data (currently implemented: daily) to time-series data with weekly frequency.
 }
 \details{
-See the details section of \code{\link{convert.to.daily}} function.
+See the details section of the \code{\link{convert.to.daily}} function.
 }
 \examples{
-startFreq <- f.daily(2022, 9, 1)
+startFreq <- f.daily(c(2022, 9, 1))
 v <- variable(c(1,2,3,4,5,6,7,8), startFreq)
 w <- convert.to.weekly(v, "mon", function(x)mean(x, na.rm=TRUE))
 

@@ -2,18 +2,18 @@
 % Please edit documentation in R/generics_f.R
 \name{print.ldtf}
 \alias{print.ldtf}
-\title{Prints an \code{ldtf} object}
+\title{Print a Frequency}
 \usage{
 \method{print}{ldtf}(x, ...)
 }
 \arguments{
-\item{x}{An \code{ldtf} object}
+\item{x}{A frequency which is the output of \code{f.?} functions in this package.}
 
-\item{...}{additional arguments}
+\item{...}{Additional arguments}
 }
 \value{
 \code{NULL}
 }
 \description{
-Prints an \code{ldtf} object
+Print a Frequency
 }

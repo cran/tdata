@@ -2,37 +2,35 @@
 % Please edit documentation in R/frequency.R
 \name{f.hourly}
 \alias{f.hourly}
-\title{Creates an 'Hourly' Frequency}
+\title{Create an 'Hourly' Frequency}
 \usage{
 f.hourly(day, hour)
 }
 \arguments{
 \item{day}{A 'Day-based' object of class \code{ldtf}, such as \code{Daily} or \code{Daily-In-Week}.}
 
-\item{hour}{Index of hour in the day. It should be between 1 and 24.}
+\item{hour}{The index of the hour in the day, which should be between 1 and 24.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{day} \tab Determines the \code{day}.\cr
-\code{hour} \tab Determines the \code{hour}.
-}
+An object of class \code{ldtf}. It is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{day}{Determines the \code{day}.}
+\item{hour}{Determines the \code{hour}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs hourly in day or a subset of a week.
+Use this function to create a frequency for time-series data that occurs hourly in a day or a subset of a week.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} \code{"YYYYMMDD:#"} (the number is the value: \code{hour})
-\item \strong{Class Id} \code{ho|...} (the '...' is the 'Class String' of \code{day})
+\item \strong{Character Format}: \code{"YYYYMMDD:#"} (where # represents the value of \code{hour})
+\item \strong{Class Id}: \code{ho|...} (where '...' represents the 'class id' of \code{day})
 }
 }
 \examples{
 
-ho0 <- f.hourly(f.daily(2023,5,16),4)
+ho0 <- f.hourly(f.daily(c(2023,5,16)),4)
 
 ho0_value_str <-  as.character(ho0) # this will be '20230516:4'.
 ho0_class_str <- get.class.id(ho0)
@@ -45,7 +43,7 @@ ho_new <- as.frequency("20231101:3", "ho|i:wed-sat")
 \donttest{
 ho_invalid <- try(as.frequency("20231101:3", "ho|j:wed-sat"))
 #  invalid format in day-based frequency
-ho_invalid <- try(f.hourly(f.daily(2023,5,16),25)) # invalid hour
+ho_invalid <- try(f.hourly(f.daily(c(2023,5,16)),25)) # invalid hour
 }
 
 }

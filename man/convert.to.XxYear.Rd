@@ -2,28 +2,28 @@
 % Please edit documentation in R/convert.R
 \name{convert.to.XxYear}
 \alias{convert.to.XxYear}
-\title{Converts Data to Year-Based Data}
+\title{Convert Data to Year-Based Frequency}
 \usage{
 convert.to.XxYear(variable, x, aggregateFun)
 }
 \arguments{
-\item{variable}{A variable}
+\item{variable}{A variable.}
 
-\item{x}{Determines the number of partitions in each year. For example, use 12 for monthly data.}
+\item{x}{Determines the number of partitions in each year, for example, use 12 for monthly data.}
 
-\item{aggregateFun}{A function that aggregates the data within each interval.}
+\item{aggregateFun}{Function to aggregate data within each interval.}
 }
 \value{
 A variable with year-based frequency.
 }
 \description{
-Use this to convert time-series data (currently implemented: daily) to time-series data with year-based frequency such as monthly, quarterly, yearly, etc.
+Use this function to convert time-series data (currently implemented: daily) to time-series data with year-based frequency such as monthly, quarterly, yearly, etc.
 }
 \details{
-See the details section of \code{\link{convert.to.daily}} function.
+See the details section of the \code{\link{convert.to.daily}} function.
 }
 \examples{
-startFreq <- f.daily(2023,1,1)
+startFreq <- f.daily(c(2023,1,1))
 v <- variable(c(1:(365*2)), startFreq)
 w <- convert.to.XxYear(v,12,function(x)mean(x))
 

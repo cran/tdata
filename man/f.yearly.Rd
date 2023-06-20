@@ -2,25 +2,23 @@
 % Please edit documentation in R/frequency.R
 \name{f.yearly}
 \alias{f.yearly}
-\title{Creates an Annual Frequency}
+\title{Create an Annual Frequency}
 \usage{
 f.yearly(year)
 }
 \arguments{
-\item{year}{Year of the observation}
+\item{year}{An integer representing the year of the observation.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.
-}
+An object of class \code{ldtf} which is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{year}{Determines the \code{year}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs annually.
+Use this function to create a frequency for time-series data that occurs annually.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
 \item \strong{Character Format} \code{"#"} (the number is the \code{year})

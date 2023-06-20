@@ -2,18 +2,18 @@
 % Please edit documentation in R/generics_f.R
 \name{as.frequency}
 \alias{as.frequency}
-\title{Converts Character to frequency}
+\title{Convert Character String to Frequency}
 \usage{
 as.frequency(str, classId)
 }
 \arguments{
-\item{str}{value of the frequency as a valid character. You might have get it from \code{\link{as.character.ldtf}} function}
+\item{str}{The value of the frequency as a valid character, which you might have obtained from the \code{\link{as.character.ldtf}} function.}
 
-\item{classId}{class id of the frequency as a valid character.}
+\item{classId}{The class id of the frequency. These are explained in \code{f.?} functions.}
 }
 \value{
-An object of class 'ldtf'
+A frequency, which is an object of class 'ldtf'. See the \code{f.?} functions.
 }
 \description{
-Use this method to convert back your character to a frequency. You need the class id information.
+Use this function to convert a character string back to a frequency. You need the class id information.
 }

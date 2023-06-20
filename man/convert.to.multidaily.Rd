@@ -2,30 +2,30 @@
 % Please edit documentation in R/convert.R
 \name{convert.to.multidaily}
 \alias{convert.to.multidaily}
-\title{Converts Data to Multi-Day Data}
+\title{Convert Data to Multi-Day Frequency}
 \usage{
 convert.to.multidaily(variable, k, aggregateFun, fromEnd = TRUE)
 }
 \arguments{
 \item{variable}{A variable.}
 
-\item{k}{Number of days in multi-day frequency. It should be positive.}
+\item{k}{Number of days in multi-day frequency, must be positive.}
 
-\item{aggregateFun}{A function that aggregates the data within each interval.}
+\item{aggregateFun}{Function to aggregate data within each interval.}
 
-\item{fromEnd}{If the number of observations is not divisible by \code{k}, this argument matters. If \code{TRUE}, the last observation is the combination of \code{k} observations. Otherwise, the last observation might be created from a lower number of observations.}
+\item{fromEnd}{If the number of observations is not divisible by \code{k}, this argument matters. If \code{TRUE}, the last observation is the combination of \code{k} observations. Otherwise, the last observation may be created from fewer observations.}
 }
 \value{
-It returns a variable with multi-day frequency.
+A variable with multi-day frequency.
 }
 \description{
-Use this to convert a time-series data (currently implemented: daily) to a time-series data with multi-day frequency.
+Use this function to convert a time-series data (currently implemented: daily) to a time-series data with multi-day frequency.
 }
 \details{
-See the details section of \code{\link{convert.to.daily}} function.
+See the details section of the \code{\link{convert.to.daily}} function.
 }
 \examples{
-startFreq <- f.daily(2022, 9, 1)
+startFreq <- f.daily(c(2022, 9, 1))
 v <- variable(c(1,2,3,4,5,6,7,8), startFreq)
 w <- convert.to.multidaily(v, 3, function(x)mean(x, na.rm=TRUE))
 }

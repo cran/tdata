@@ -2,47 +2,43 @@
 % Please edit documentation in R/frequency.R
 \name{f.multi.weekly}
 \alias{f.multi.weekly}
-\title{Creates a Multi-Week Frequency}
+\title{Create a Multi-Week Frequency}
 \usage{
-f.multi.weekly(year, month, day, k)
+f.multi.weekly(date, k)
 }
 \arguments{
-\item{year}{Year of the observation. It should be a valid year as an integer.}
+\item{date}{The date, which can be a list with \code{year}, \code{month}, and \code{day} elements.
+It can also be an integer array with 3 elements for year, month, and day respectively,
+or an object that can be used as an argument for the \code{base::as.Date} function.}
 
-\item{month}{Month of the observation. It should be a valid month of year as an integer.}
-
-\item{day}{Day of the observation which will determine the start of the week. It should be a valid day of month as an integer.}
-
-\item{k}{Number of weeks.}
+\item{k}{The number of weeks.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{month} \tab Determines the \code{month}.\cr
-\code{day} \tab Determines the \code{day}.\cr
-\code{k} \tab Determines the value: \code{k}.
-}
+An object of class \code{ldtf}, which is also a list with the following members:
+\item{class}{The class of this frequency.}
+\item{year}{The \code{year}.}
+\item{month}{The \code{month}.}
+\item{day}{The \code{day}.}
+\item{k}{The value of \code{k}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs every 'k' weeks. We use first day of the first week as the reference.
+Use this function to create a frequency for time-series data that occurs every 'k' weeks. The first day of the first week is used as the reference.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+To use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} First day of the first week in \code{"YYYYMMDD"} format.
-\item \strong{Class Id} \code{"w#"} (the number is value: \code{k}; e.g., w3 means every 3 weeks)
+\item \strong{Character Format} The first day of the first week in \code{"YYYYMMDD"} format.
+\item \strong{Class Id} \code{"w#"} (the number is the value of \code{k}; e.g., w3 means every 3 weeks)
 }
 }
 \examples{
 
-mw0 <- f.multi.weekly(2023, 1, 2,3)
-#      This is 2/1/2023 which is Monday. Next observation belongs to 23/1/2023.
+mw0 <- f.multi.weekly(c(2023, 1, 2), 3)
+# This is 2/1/2023, which is Monday. The next observation belongs to 23/1/2023.
 
-mw0_value_str <-  as.character(mw0) # this will be '20230102'.
-mw0_class_str <- get.class.id(mw0) # this will be 'w3'.
+mw0_value_str <- as.character(mw0) # This will be '20230102'.
+mw0_class_str <- get.class.id(mw0) # This will be 'w3'.
 
 mw_new <- as.frequency("20230109", "w4") # This is 9/1/2023.
 

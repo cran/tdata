@@ -2,28 +2,28 @@
 % Please edit documentation in R/convert.R
 \name{convert.to.daily}
 \alias{convert.to.daily}
-\title{Converts Data to Daily Data}
+\title{Convert Data to Daily Frequency}
 \usage{
 convert.to.daily(variable, aggregateFun = NULL)
 }
 \arguments{
 \item{variable}{A variable.}
 
-\item{aggregateFun}{A function to aggregates the data within each interval (see the datails).}
+\item{aggregateFun}{Function to aggregate data within each interval (see details).}
 }
 \value{
-A variable with daily frequency. Its data is the sorted data of the original variable, while missing dates are filled with \code{NA}.
+A variable with daily frequency, with data sorted from the original variable and missing dates filled with \code{NA}.
 }
 \description{
-Use this to convert a time-series data (currently implemented: \code{Date-List}, \code{Daily-In-Week}) to a time-series data with daily frequency.
+Use this function to convert a time-series data (currently implemented: \code{Date-List}, \code{Daily-In-Week}) to a time-series data with daily frequency.
 }
 \details{
-For some cases, conversion sorts the dates and fills any gaps between them with \code{NA}.
-However, in some cases conversion requires an aggregation. For example,
+In some cases, conversion sorts the dates and fills any gaps between them with \code{NA}.
+However, in other cases, conversion requires aggregation. For example,
 when aggregating hourly data over a period of \code{k} hours to generate daily data,
 we expect \code{k} numbers in each interval.
 The aggregate function can be set to calculate the mean,
-variance, median, ..., or any function that takes
+variance, median, etc., or any function that takes
 the vector of \code{k} values and returns a number.
 }
 \examples{

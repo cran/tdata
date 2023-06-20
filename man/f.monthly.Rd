@@ -2,28 +2,26 @@
 % Please edit documentation in R/frequency.R
 \name{f.monthly}
 \alias{f.monthly}
-\title{Creates a Monthly Frequency}
+\title{Create a Monthly Frequency}
 \usage{
 f.monthly(year, month)
 }
 \arguments{
-\item{year}{Year of the observation.}
+\item{year}{An integer representing the year of the observation.}
 
-\item{month}{Month of the observation (It should be between 1 to 12).}
+\item{month}{An integer representing the month of the observation (It should be between 1 to 12).}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{month} \tab Determines the \code{month}.
-}
+An object of class \code{ldtf} which is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{year}{Determines the \code{year}.}
+\item{month}{Determines the \code{month}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs monthly.
+Use this function to create a frequency for time-series data that occurs monthly.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
 \item \strong{Character Format} \code{"#m#"} (first # is the \code{year}, second # is

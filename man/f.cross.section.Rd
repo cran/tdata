@@ -2,26 +2,24 @@
 % Please edit documentation in R/frequency.R
 \name{f.cross.section}
 \alias{f.cross.section}
-\title{Creates a Cross-Section Frequency}
+\title{Create a Cross-Section Frequency}
 \usage{
 f.cross.section(position)
 }
 \arguments{
-\item{position}{Position of the observation}
+\item{position}{An integer representing the position of the observation.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{position} \tab Determines the \code{position}.
-}
+An object of class \code{ldtf} which is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{position}{Determines the \code{position}.}
 }
 \description{
 This frequency is typically used for indexed data. It is represented by an integer
 that indicates the position of the observation.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
 \item \strong{Character Format} \code{"#"} (the number is the \code{position})

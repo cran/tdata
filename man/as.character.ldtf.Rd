@@ -2,18 +2,18 @@
 % Please edit documentation in R/generics_f.R
 \name{as.character.ldtf}
 \alias{as.character.ldtf}
-\title{Converts Frequency to Character}
+\title{Convert Frequency to Character}
 \usage{
 \method{as.character}{ldtf}(x, ...)
 }
 \arguments{
-\item{x}{value of the frequency. It must be an \code{ldtf} object returned from \code{f.?} functions.}
+\item{x}{The value of the frequency, which must be an \code{ldtf} object returned from the \code{f.?} functions.}
 
-\item{...}{additional arguments.}
+\item{...}{Additional arguments.}
 }
 \value{
-String representation of the value of the frequency
+A string representation of the value of the frequency.
 }
 \description{
-The format is explained in \code{f.?} functions.
+This function converts a frequency to its string representation. The format is explained in the \code{f.?} functions.
 }

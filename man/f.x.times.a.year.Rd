@@ -2,31 +2,29 @@
 % Please edit documentation in R/frequency.R
 \name{f.x.times.a.year}
 \alias{f.x.times.a.year}
-\title{Creates an \code{X-Times-A-Year} Frequency}
+\title{Create an \code{X-Times-A-Year} Frequency}
 \usage{
 f.x.times.a.year(year, x, position)
 }
 \arguments{
-\item{year}{Year of the observation.}
+\item{year}{An integer representing the year of the observation.}
 
-\item{x}{Number of the observation in each year. It should be a positive integer.}
+\item{x}{An integer representing the number of observations in each year. It should be a positive integer.}
 
-\item{position}{Position of the current observation. It should be a positive integer. It cannot be larger than \code{x}.}
+\item{position}{An integer representing the position of the current observation. It should be a positive integer and cannot be larger than \code{x}.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{x} \tab Determines the value: \code{x}.\cr
-\code{position} \tab Determines the \code{position}.
-}
+An object of class \code{ldtf} which is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{year}{Determines the \code{year}.}
+\item{x}{Determines the value: \code{x}.}
+\item{position}{Determines the \code{position}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs \code{x} times every year.
+Use this function to create a frequency for time-series data that occurs \code{x} times every year.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
 \item \strong{Character Format} \code{"#:#"} (first # is the \code{year} and

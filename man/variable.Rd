@@ -2,30 +2,30 @@
 % Please edit documentation in R/variable.R
 \name{variable}
 \alias{variable}
-\title{Creates a Variable}
+\title{Create a Variable}
 \usage{
 variable(data, startFrequency = NULL, name = NULL, fields = NULL)
 }
 \arguments{
-\item{data}{Data of the variable.}
+\item{data}{The data of the variable.}
 
-\item{startFrequency}{Frequency of the first element.}
+\item{startFrequency}{The frequency of the first element.}
 
-\item{name}{Name of the variable.}
+\item{name}{The name of the variable.}
 
 \item{fields}{A list that contains named fields.}
 }
 \value{
-An object of class \code{ldtv}. This is also a list with the following memebers:
+An object of class \code{ldtv}, which is also a list with the following members:
 \itemize{
-\item \strong{data:} Determines the \code{data}.
-\item \strong{name:} Determines the \code{name}.
-\item \strong{startFrequency:} Determines the \code{startFrequency}.
-\item \strong{fields:} Determines the \code{fields}.
+\item \strong{data}: Determines the \code{data}.
+\item \strong{name}: Determines the \code{name}.
+\item \strong{startFrequency}: Determines the \code{startFrequency}.
+\item \strong{fields}: Determines the \code{fields}.
 }
 }
 \description{
-Use this to create data array with a frequency. It can have a name and other named fields.
+Use this function to create a variable, which is a data array with frequencies. It can have a name and other named fields.
 }
 \examples{
 data <- c(1,2,3,2,3,4,5)

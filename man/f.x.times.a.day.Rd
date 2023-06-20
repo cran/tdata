@@ -2,39 +2,37 @@
 % Please edit documentation in R/frequency.R
 \name{f.x.times.a.day}
 \alias{f.x.times.a.day}
-\title{Creates an \code{X-Times-A-Day} Frequency}
+\title{Create an \code{X-Times-A-Day} Frequency}
 \usage{
 f.x.times.a.day(day, x, position)
 }
 \arguments{
 \item{day}{A 'Day-based' object of class \code{ldtf}, such as \code{Daily} or \code{Daily-In-Week}.}
 
-\item{x}{Number of observations in each day.}
+\item{x}{The number of observations in each day.}
 
-\item{position}{Position of the current observation. It should be a positive integer. It cannot be larger than \code{x}.}
+\item{position}{The position of the current observation, which should be a positive integer and cannot be larger than \code{x}.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{day} \tab Determines the \code{day}.\cr
-\code{second} \tab Determines the \code{second}.
-}
+An object of class \code{ldtf}. It is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{day}{Determines the \code{day}.}
+\item{second}{Determines the \code{second}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs \code{x} times in day or a subset of a week.
+Use this function to create a frequency for time-series data that occurs \code{x} times in a day or a subset of a week.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} \code{"#"} (in which '#' is the value: \code{position})
-\item \strong{Class Id} \code{"da#|..."} (in which '#' is the value: \code{x} and '...' is the 'Class String' of \code{day}))
+\item \strong{Character Format}: \code{"#"} (where '#' represents the value of \code{position})
+\item \strong{Class Id}: \code{"da#|..."} (where '#' represents the value of \code{x} and '...' represents the 'class id' of \code{day})
 }
 }
 \examples{
 
-xd0 <- f.x.times.a.day(f.daily(2023,5,16),13, 12)
+xd0 <- f.x.times.a.day(f.daily(c(2023,5,16)),13, 12)
 
 xd0_value_str <-  as.character(xd0) # this will be '20230516:12'.
 xd0_class_str <- get.class.id(xd0)
@@ -47,7 +45,7 @@ xd_new <- as.frequency("20231101:3", "da3|i:wed-sat")
 \donttest{
 xd_invalid <- try(as.frequency("20231101:3", "da|i:wed-sat"))
 #  invalid format in day-based frequency
-xd_invalid <- try(f.x.times.a.day(f.daily(2023,5,16),4,0)) # invalid position
+xd_invalid <- try(f.x.times.a.day(f.daily(c(2023,5,16)),4,0)) # invalid position
 }
 
 }

@@ -2,69 +2,52 @@
 % Please edit documentation in R/frequency.R
 \name{f.daily.in.week}
 \alias{f.daily.in.week}
-\title{Creates an \code{Daily-In-Week} Frequency}
+\title{Create a \code{Daily-In-Week} Frequency}
 \usage{
-f.daily.in.week(
-  year,
-  month,
-  day,
-  weekStart = "mon",
-  weekEnd = "fri",
-  forward = TRUE,
-  dateString = NULL,
-  asDateFun = NULL
-)
+f.daily.in.week(date, weekStart = "mon", weekEnd = "fri", forward = TRUE)
 }
 \arguments{
-\item{year}{Year of the observation. It should be a valid year as an integer.}
+\item{date}{The date, which can be a list with \code{year}, \code{month}, and \code{day} elements.
+It can also be an integer array with 3 elements for year, month, and day respectively,
+or an object that can be used as an argument for the \code{base::as.Date} function.}
 
-\item{month}{Month of the observation. It should be a valid month of year as an integer.}
+\item{weekStart}{The first day of the week, which can be \code{sun}, \code{mon}, \code{tue}, \code{wed}, \code{thu}, \code{fri}, or \code{sat}.}
 
-\item{day}{Day of the observation which will determine the start of the week. It should be a valid day of month as an integer.}
-
-\item{weekStart}{First day of the week. It can be \code{sun}, \code{mon}, \code{tue}, \code{wed}, \code{thu}, \code{fri}, and \code{sat}.}
-
-\item{weekEnd}{Last day of the week. See \code{weekStart} for possible values. Together, they define the week}
+\item{weekEnd}{The last day of the week, which can be one of the values listed for \code{weekStart}. Together, they define the week.}
 
 \item{forward}{If the current date is not in the week and this value is true, it moves forward to the first day of the week. If this value is false, it moves backward to the last day of the week.}
-
-\item{dateString}{A string that represents a date. If not \code{NULL}, this will be used instead of \code{year}, \code{month}, and \code{day}, and they can be omitted.}
-
-\item{asDateFun}{If \code{dateString} is given, you can use it to convert the string to a \code{Date}. If \code{NULL}, default conversion is used.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{month} \tab Determines the \code{month}.\cr
-\code{day} \tab Determines the \code{day}.\cr
-\code{weekStart} \tab Determines the \code{weekStart}.\cr
-\code{weekEnd} \tab Determines the \code{weekEnd}.
-}
+An object of class \code{ldtf}. It is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{year}{Determines the \code{year}.}
+\item{month}{Determines the \code{month}.}
+\item{day}{Determines the \code{day}.}
+\item{weekStart}{Determines the \code{weekStart}.}
+\item{weekEnd}{Determines the \code{weekEnd}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs daily within a subset of a week. The first day of the interval is used as the reference.
+Use this function to create a frequency for time-series data that occurs daily within a subset of a week. The first day of the interval is used as the reference.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} \code{"YYYYMMDD"} (First day of the interval in \code{"YYYYMMDD"} format.)
-\item \strong{Class Id} \code{"i:...-..."} (the first '...' is \code{weekStart} and the second '...' is \code{weekEnd}; e.g., \code{i:mon-fri} means a week from Monday to Friday)
+\item \strong{Character Format}: The first day of the interval in \code{"YYYYMMDD"} format.
+\item \strong{Class Id}: \code{"i:...-..."} (where the first '...' represents \code{weekStart} and the second '...' represents \code{weekEnd}; e.g., \code{i:mon-fri} means a week from Monday to Friday)
 }
 }
 \examples{
 
-dw0 <- f.daily.in.week(2023, 5, 16, "mon", "fri") # This is 16/5/2023.
+dw0 <- f.daily.in.week(c(2023, 5, 16), "mon", "fri") # This is 16/5/2023.
 dw0_value_str <-  as.character(dw0) # this will be '20230516'.
 dw0_class_str <- get.class.id(dw0) # this will be 'i:mon-fri'.
 
 # Let's use the same date with another week definition:
-dw1 <- f.daily.in.week(2023, 5, 16, "wed", "sat")
+dw1 <- f.daily.in.week(c(2023, 5, 16), "wed", "sat")
 #     This is NOT 16/5/2023. It is 17/5/2023.
 #     Since it was outside the week, we moved it forward.
-dw2 <- f.daily.in.week(2023, 5, 16, "wed", "sat", FALSE)
+dw2 <- f.daily.in.week(c(2023, 5, 16), "wed", "sat", FALSE)
 #     This is 13/5/2023. The original day was outside the
 #     week, but we moved backward too the end of
 #     the previous week (which is Saturday).
@@ -79,7 +62,7 @@ dw_invalid <- try(as.frequency("20230132", "d4")) # invalid day in month
 dw_invalid <- try(as.frequency("20231331", "d5")) # invalid month
 
 # don't use invalid week definitions:
-dw_invalid <- try(f.daily.in.week(2023, 5, 16, "Wednesday", "sat"))
+dw_invalid <- try(f.daily.in.week(c(2023, 5, 16), "Wednesday", "sat"))
 }
 
 }

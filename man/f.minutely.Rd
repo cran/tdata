@@ -2,37 +2,35 @@
 % Please edit documentation in R/frequency.R
 \name{f.minutely}
 \alias{f.minutely}
-\title{Creates an \code{Minute-ly} Frequency}
+\title{Create a \code{Minute-ly} Frequency}
 \usage{
 f.minutely(day, minute)
 }
 \arguments{
 \item{day}{A 'Day-based' object of class \code{ldtf}, such as \code{Daily} or \code{Daily-In-Week}.}
 
-\item{minute}{Index of hour in the day. It should be between 1 and 1440.}
+\item{minute}{The index of the minute in the day, which should be between 1 and 1440.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{day} \tab Determines the \code{day}.\cr
-\code{minute} \tab Determines the \code{minute}.
-}
+An object of class \code{ldtf}. It is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{day}{Determines the \code{day}.}
+\item{minute}{Determines the \code{minute}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs every minute in day or a subset of a week.
+Use this function to create a frequency for time-series data that occurs every minute in a day or a subset of a week.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} \code{"YYYYMMDD:#"} (the number is the value: \code{minute})
-\item \strong{Class Id} \code{mi|...} (the '...' is the 'Class String' of \code{day})
+\item \strong{Character Format}: \code{"YYYYMMDD:#"} (where # represents the value of \code{minute})
+\item \strong{Class Id}: \code{mi|...} (where '...' represents the 'class id' of \code{day})
 }
 }
 \examples{
 
-mi0 <- f.minutely(f.daily(2023,5,16),1200)
+mi0 <- f.minutely(f.daily(c(2023,5,16)),1200)
 
 mi0_value_str <-  as.character(mi0) # this will be '20230516:1200'.
 mi0_class_str <- get.class.id(mi0)
@@ -45,7 +43,7 @@ mi_new <- as.frequency("20231101:3", "mi|i:wed-sat")
 \donttest{
 mi_invalid <- try(as.frequency("20231101:3", "mi|j:wed-sat"))
 #   invalid format in day-based frequency
-mi_invalid <- try(f.minutely(f.daily(2023,5,16),2000)) # invalid minute
+mi_invalid <- try(f.minutely(f.daily(c(2023,5,16)),2000)) # invalid minute
 }
 
 }

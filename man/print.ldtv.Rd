@@ -2,18 +2,18 @@
 % Please edit documentation in R/variable.R
 \name{print.ldtv}
 \alias{print.ldtv}
-\title{Prints a Variable}
+\title{Print a Variable}
 \usage{
 \method{print}{ldtv}(x, ...)
 }
 \arguments{
-\item{x}{An \code{ldtv} object}
+\item{x}{A variable which is an object of class \code{ldtv}.}
 
-\item{...}{additional arguments}
+\item{...}{Additional arguments}
 }
 \value{
 \code{NULL}
 }
 \description{
-Use this to print an \code{ldtv} object.
+Use this to print a variable.
 }

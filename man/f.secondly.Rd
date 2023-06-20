@@ -2,37 +2,35 @@
 % Please edit documentation in R/frequency.R
 \name{f.secondly}
 \alias{f.secondly}
-\title{Creates an \code{Second-ly} Frequency}
+\title{Create a \code{Second-ly} Frequency}
 \usage{
 f.secondly(day, second)
 }
 \arguments{
 \item{day}{A 'Day-based' object of class \code{ldtf}, such as \code{Daily} or \code{Daily-In-Week}.}
 
-\item{second}{Index of hour in the day. It should be between 1 and 86400.}
+\item{second}{The index of the second in the day, which should be between 1 and 86400.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{day} \tab Determines the \code{day}.\cr
-\code{second} \tab Determines the \code{second}.
-}
+An object of class \code{ldtf}. It is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{day}{Determines the \code{day}.}
+\item{second}{Determines the \code{second}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs every second in day or a subset of a week.
+Use this function to create a frequency for time-series data that occurs every second in a day or a subset of a week.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} \code{"YYYYMMDD:#"} (the number is the value: \code{second})
-\item \strong{Class Id} \code{se|...} (the '...' is the 'Class String' of \code{day})
+\item \strong{Character Format}: \code{"YYYYMMDD:#"} (where # represents the value of \code{second})
+\item \strong{Class Id}: \code{se|...} (where '...' represents the 'class id' of \code{day})
 }
 }
 \examples{
 
-se0 <- f.secondly(f.daily(2023,5,16),40032)
+se0 <- f.secondly(f.daily(c(2023,5,16)),40032)
 
 se0_value_str <-  as.character(se0) # this will be '20230516:40032'.
 se0_class_str <- get.class.id(se0)
@@ -45,7 +43,7 @@ se_new <- as.frequency("20231101:3", "se|i:wed-sat")
 \donttest{
 mi_invalid <- try(as.frequency("20231101:3", "se|j:wed-sat"))
 #  invalid format in day-based frequency
-mi_invalid <- try(f.secondly(f.daily(2023,5,16),100000)) # invalid second
+mi_invalid <- try(f.secondly(f.daily(c(2023,5,16)),100000)) # invalid second
 }
 
 }

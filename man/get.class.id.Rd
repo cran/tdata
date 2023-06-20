@@ -2,25 +2,25 @@
 % Please edit documentation in R/generics_f.R
 \name{get.class.id}
 \alias{get.class.id}
-\title{Gets Class 'Id' of a Frequency}
+\title{Get the Class Id of a Frequency}
 \usage{
 get.class.id(frequency)
 }
 \arguments{
-\item{frequency}{The frequency. It must be an \code{ldtf} object returned from \code{f.?} functions.}
+\item{frequency}{The frequency, which must be an \code{ldtf} object returned from the \code{f.?} functions.}
 }
 \value{
-A character that represents the class Id of this frequency.
+A character string that represents the class id of this frequency.
 }
 \description{
 Use this function to get the 'id' of a frequency class.
 }
 \details{
-You need this ‘id’ to convert the character back to the object. Some frequencies have a constant class id. For example, the class id for ‘monthly’ data is m. Some class ‘ids’ have parameters in them. Note that the format is explained in f.? functions.
+You need this 'id' to convert the character back to the object. Some frequencies have a constant class id, such as 'm' for 'monthly' data. Some class 'ids' have parameters in them. Note that the format is explained in the \code{f.?} functions.
 }
 \examples{
 
-freq <- f.x.times.a.day(f.daily(2023,5,16),13, 12)
+freq <- f.x.times.a.day(f.daily(c(2023,5,16)),13, 12)
 freq_class_id <- get.class.id(freq) # this will be 'da13|d'.
 
 }

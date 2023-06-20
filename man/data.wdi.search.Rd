@@ -16,25 +16,24 @@ data.wdi.search(
 \arguments{
 \item{series}{This must be the \code{series} field in the output of the \code{\link{data.wdi.agg}} function.}
 
-\item{keywords}{(character array) Keywords to be used for searching.}
+\item{keywords}{A character array representing the keywords to be used for searching.}
 
-\item{searchName}{If \code{FALSE}, it does not search in the names field.}
+\item{searchName}{A logical value indicating whether to search in the names field or not. If \code{FALSE}, it does not search in the names field.}
 
-\item{searchDesc}{If \code{FALSE}, it does not search in the description}
+\item{searchDesc}{A logical value indicating whether to search in the description or not. If \code{FALSE}, it does not search in the description.}
 
-\item{topicKeywords}{If given, topic of a matched case must contain these keywords, too.}
+\item{topicKeywords}{A character array representing the keywords that must be contained in the topic of a matched case.}
 
-\item{findOne}{Raises error if \code{TRUE} and more than 1 series is found. default is \code{FALSE}.}
+\item{findOne}{A logical value indicating whether to raise an error if more than one series is found. The default is \code{FALSE}.}
 }
 \value{
-If \code{findOne} is \code{TRUE}, it is a series information. Otherwise, it is a list with series information.
+If \code{findOne} is \code{TRUE}, it returns a series information. Otherwise, it returns a list with series information.
 }
 \description{
-Use it to search for a series in the WDI dataset by its name, description, and some other attributes.
+Use this function to search for a series in the WDI dataset by its name, description, and some other attributes.
 }
 \examples{
 #data <- data.wdi.agg() # this is time-consuming and requires WDI dataset files
 #res <- data.wdi.search(data$series, c("GDP per capita"),
 #                        TRUE, topicKeywords = "national account")
-
 }

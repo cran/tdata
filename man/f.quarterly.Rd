@@ -2,28 +2,26 @@
 % Please edit documentation in R/frequency.R
 \name{f.quarterly}
 \alias{f.quarterly}
-\title{Creates a Quarterly Frequency}
+\title{Create a Quarterly Frequency}
 \usage{
 f.quarterly(year, quarter)
 }
 \arguments{
-\item{year}{Year of the observation.}
+\item{year}{An integer representing the year of the observation.}
 
-\item{quarter}{Quarter of the observation (It should be between 1 and 4).}
+\item{quarter}{An integer representing the quarter of the observation (It should be between 1 and 4).}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{quarter} \tab Determines the \code{quareter}.
-}
+An object of class \code{ldtf} which is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{year}{Determines the \code{year}.}
+\item{quarter}{Determines the \code{quarter}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs quarterly.
+Use this function to create a frequency for time-series data that occurs quarterly.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
 \item \strong{Character Format} \code{"#q#"} (first '#' is the \code{year}, second '#' is the

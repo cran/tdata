@@ -2,23 +2,23 @@
 % Please edit documentation in R/variable.R
 \name{as.data.frame.ldtv}
 \alias{as.data.frame.ldtv}
-\title{Converts Variable to \code{data.frame}}
+\title{Convert Variable to Data Frame}
 \usage{
 \method{as.data.frame}{ldtv}(x, ...)
 }
 \arguments{
-\item{x}{An \code{ldtv} object}
+\item{x}{An \code{ldtv} object.}
 
-\item{...}{additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A \code{data.frame} in which row names are set from the frequency of the variable.
+A data frame in which row names are set from the frequency of the variable.
 }
 \description{
-Use this to convert an \code{ldtv} object to a \code{data.frame}. You can use the result for plotting.
+Use this function to convert a variable to a data frame. You can use the result for plotting.
 }
 \examples{
-# define the variable:
+# Define the variable:
 data <- c(1,2,3,2,3,4,5)
 start_f <- f.monthly(2022,12)
 fields <- list(c("key1","value1"), c("key2", "value2"))

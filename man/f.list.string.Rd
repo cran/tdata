@@ -2,32 +2,30 @@
 % Please edit documentation in R/frequency.R
 \name{f.list.string}
 \alias{f.list.string}
-\title{Creates an \code{List-String} Frequency}
+\title{Create a \code{List-String} Frequency}
 \usage{
 f.list.string(items, value)
 }
 \arguments{
-\item{items}{Items of the list.}
+\item{items}{The items in the list.}
 
-\item{value}{Current item.}
+\item{value}{The current item.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{items} \tab Determines the \code{items}.\cr
-\code{value} \tab Determines the \code{value}.
-}
+An object of class \code{ldtf}, which is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{items}{Determines the \code{items}.}
+\item{value}{Determines the \code{value}.}
 }
 \description{
-This frequency is typically used for labeled data. It is generally a list, but it can be used to label observations outside this list.
+This frequency is typically used for labeled data. It is generally a list, but it can also be used to label observations outside this list.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} \code{"..."} (in which ... is the \code{value})
-\item \strong{Class Id} \code{Ls} or \code{Ls:...} (in which ... is the semi-colon separated \code{items})
+\item \strong{Character Format}: \code{"..."} (where '...' represents the \code{value})
+\item \strong{Class Id}: \code{Ls} or \code{Ls:...} (where '...' represents the semi-colon-separated \code{items})
 }
 }
 \examples{

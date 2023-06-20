@@ -2,40 +2,38 @@
 % Please edit documentation in R/frequency.R
 \name{f.weekly}
 \alias{f.weekly}
-\title{Creates a Weekly Frequency}
+\title{Create a Weekly Frequency}
 \usage{
-f.weekly(year, month, day)
+f.weekly(date)
 }
 \arguments{
-\item{year}{Year of the observation. It should be a valid year as an integer.}
-
-\item{month}{Month of the observation. It should be a valid month of year as an integer.}
-
-\item{day}{Day of the observation which will determine the start of the week. It should be a valid day of month as an integer.}
+\item{date}{The date, which can be a list with \code{year}, \code{month}, and \code{day} elements.
+It can also be an integer array with 3 elements for year, month, and day respectively,
+or an object that can be used as an argument for the \code{base::as.Date} function.
+This date determines the start of the week.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{month} \tab Determines the \code{month}.\cr
-\code{day} \tab Determines the \code{day}.
-}
+An object of class \code{ldtf}, which is also a list with the following members:
+\item{class}{The class of this frequency.}
+\item{year}{The \code{year}.}
+\item{month}{The \code{month}.}
+\item{day}{The \code{day}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs weekly. We use first day of the week as the reference.
+Use this function to create a frequency for time-series data that occurs weekly. The first day of the week is used as the reference.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+To use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} First day of the week in \code{"YYYYMMDD"} format.
+\item \strong{Character Format} The first day of the week in \code{"YYYYMMDD"} format.
 \item \strong{Class Id} \code{"w"}
 }
 }
 \examples{
 
-w0 <- f.weekly(2023, 1, 2) # This is 2/1/2023 which is Monday. Next observation belongs to 9/1/2023.
+w0 <- f.weekly(c(2023, 1, 2)) # This is 2/1/2023, which is Monday.
+#    The next observation belongs to 9/1/2023.
 
 w0_value_str <-  as.character(w0) # this will be '20230102'.
 w0_class_str <- get.class.id(w0) # this will be 'w'.

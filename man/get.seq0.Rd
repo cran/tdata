@@ -2,22 +2,22 @@
 % Please edit documentation in R/generics_f.R
 \name{get.seq0}
 \alias{get.seq0}
-\title{Generates a Sequence from a Range of Frequency}
+\title{Generate a Sequence from a Range of Frequencies}
 \usage{
 get.seq0(start, length, by = 1)
 }
 \arguments{
-\item{start}{First frequency of the sequence .}
+\item{start}{The first frequency of the sequence.}
 
-\item{length}{Length of the sequence}
+\item{length}{The length of the sequence.}
 
-\item{by}{increment of the sequence}
+\item{by}{An integer that determines the increment of the sequence.}
 }
 \value{
-A list of characters that represents the sequence.
+A list of character strings that represents the sequence.
 }
 \description{
-Use it to generate a list of characters, where each element is a string representation of a frequency within the specified range.
+Use this function to generate a list of character strings, where each element is a string representation of a frequency within the specified range.
 }
 \examples{
 start <- f.monthly(2020,1)

@@ -361,6 +361,41 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// F_GetClass
+int F_GetClass(std::string name);
+RcppExport SEXP _tdata_F_GetClass(SEXP nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type name(nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(F_GetClass(name));
+    return rcpp_result_gen;
+END_RCPP
+}
+// F_Next
+SEXP F_Next(SEXP freq, int steps);
+RcppExport SEXP _tdata_F_Next(SEXP freqSEXP, SEXP stepsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type freq(freqSEXP);
+    Rcpp::traits::input_parameter< int >::type steps(stepsSEXP);
+    rcpp_result_gen = Rcpp::wrap(F_Next(freq, steps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// F_Minus
+int F_Minus(SEXP freq1, SEXP freq2);
+RcppExport SEXP _tdata_F_Minus(SEXP freq1SEXP, SEXP freq2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type freq1(freq1SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type freq2(freq2SEXP);
+    rcpp_result_gen = Rcpp::wrap(F_Minus(freq1, freq2));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Get_Descriptive
 NumericVector Get_Descriptive(NumericVector w, const char* type, bool skipNAN);
 RcppExport SEXP _tdata_Get_Descriptive(SEXP wSEXP, SEXP typeSEXP, SEXP skipNANSEXP) {
@@ -444,6 +479,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_tdata_Parse_F", (DL_FUNC) &_tdata_Parse_F, 2},
     {"_tdata_Sequence_F0", (DL_FUNC) &_tdata_Sequence_F0, 3},
     {"_tdata_Sequence_F", (DL_FUNC) &_tdata_Sequence_F, 3},
+    {"_tdata_F_GetClass", (DL_FUNC) &_tdata_F_GetClass, 1},
+    {"_tdata_F_Next", (DL_FUNC) &_tdata_F_Next, 2},
+    {"_tdata_F_Minus", (DL_FUNC) &_tdata_F_Minus, 2},
     {"_tdata_Get_Descriptive", (DL_FUNC) &_tdata_Get_Descriptive, 3},
     {"_tdata_Variable", (DL_FUNC) &_tdata_Variable, 4},
     {"_tdata_VariableToString", (DL_FUNC) &_tdata_VariableToString, 1},

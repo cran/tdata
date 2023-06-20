@@ -2,28 +2,26 @@
 % Please edit documentation in R/frequency.R
 \name{f.multi.yearly}
 \alias{f.multi.yearly}
-\title{Creates a Multi-Year Frequency}
+\title{Create a Multi-Year Frequency}
 \usage{
 f.multi.yearly(year, z)
 }
 \arguments{
-\item{year}{Year of the observation.}
+\item{year}{An integer representing the year of the observation.}
 
-\item{z}{Number of years. It should be larger than zero.}
+\item{z}{An integer representing the number of years. It should be larger than zero.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{z} \tab Determines the value: \code{z}.
-}
+An object of class \code{ldtf} which is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{year}{Determines the \code{year}.}
+\item{z}{Determines the value: \code{z}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs every \code{z} years.
+Use this function to create a frequency for time-series data that occurs every \code{z} years.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
 \item \strong{Character Format} \code{"#"} (the number is the \code{year}, which means the string representation is the first year of the interval)

@@ -14,27 +14,30 @@ get.longrun.growth(
 )
 }
 \arguments{
-\item{data}{(numeric vector) Determines the data of the series.}
+\item{data}{A numeric vector that represents the data of the series.}
 
-\item{continuous}{(logical) if \code{TRUE}, it will use the continuous formula.}
+\item{continuous}{A logical value indicating whether to use the continuous formula.}
 
-\item{isPercentage}{(logical) If the unit of measurement in \code{data} is percentage (e.g., growth rate), use \code{TRUE}. The long-run growth rate is calculated by the arithmetic mean for the continuous case and the geometric mean otherwise. If missing data exists, it returns \code{NA}.}
+\item{isPercentage}{A logical value indicating whether the unit of measurement in \code{data} is a percentage (e.g., growth rate).
+If \code{TRUE}, the long-run growth rate is calculated by the arithmetic mean for the continuous case and the geometric mean otherwise.
+If missing data exists, it returns \code{NA}.}
 
-\item{trimStart}{If the number of leading \code{NA}s is larger than this number, the function returns NA. Otherwise, it finds the first non-NA value and continues the calculations.}
+\item{trimStart}{If the number of leading \code{NA}s is larger than this number, the function returns \code{NA}.
+Otherwise, it finds the first non-NA value and continues the calculations.}
 
 \item{trimEnd}{Similar to \code{trimStart}, but for the end of the series.}
 
 \item{skipZero}{If \code{TRUE}, leading and trailing zeros are skipped, similar to \code{NA}.}
 }
 \value{
-Long-run growth rate (percentage)
+The long-run growth rate (percentage).
 }
 \description{
-Use this to calculate long-run growth of a time-series data.
+Use this function to calculate the long-run growth of a time-series data.
 }
 \details{
-A variable can have continuous growth (\eqn{y(t)=y(0) (1+g_1)(1+g_2)\ldots (1+g_t)})
-or discrete growth (\eqn{y(t)=y(0)e^{g_1}e^{g_2}\ldots e^{g_t}}) over \eqn{t} periods.
+A variable can have discrete growth (\eqn{y(t)=y(0) (1+g_1)(1+g_2)\ldots (1+g_t)})
+or continuous growth (\eqn{y(t)=y(0)e^{g_1}e^{g_2}\ldots e^{g_t}}) over \eqn{t} periods.
 \eqn{y(0)} is the first value and \eqn{y(n)} is the last value.
 By long-run growth rate, we mean a number such as \eqn{g} such that if
 we start from \eqn{y(0)} and the variable growth is \eqn{g} every period,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/variable.R
 \name{as.character.ldtv}
 \alias{as.character.ldtv}
-\title{Converts a Variable to String}
+\title{Convert a Variable to Character String}
 \usage{
 \method{as.character}{ldtv}(x, ...)
 }
@@ -15,10 +15,10 @@
 A character that represents the variable.
 }
 \description{
-Use this to convert the variable in a compact form.
+Use this function to convert a variable to a compact form.
 }
 \details{
-The returned character will have just one line, items are separated by \code{tab} or \code{semi-colon}.
+The returned character will have just one line, with items separated by \code{tab} or \code{semi-colon}.
 }
 \examples{
 # define the variable:

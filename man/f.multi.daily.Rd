@@ -2,47 +2,39 @@
 % Please edit documentation in R/frequency.R
 \name{f.multi.daily}
 \alias{f.multi.daily}
-\title{Creates an Multi-Day Frequency}
+\title{Create a Multi-Day Frequency}
 \usage{
-f.multi.daily(year, month, day, k, dateString = NULL, asDateFun = NULL)
+f.multi.daily(date, k)
 }
 \arguments{
-\item{year}{Year of the observation. It should be a valid year as an integer.}
+\item{date}{The date, which can be a list with \code{year}, \code{month}, and \code{day} elements.
+It can also be an integer array with 3 elements for year, month, and day respectively,
+or an object that can be used as an argument for the \code{base::as.Date} function.}
 
-\item{month}{Month of the observation. It should be a valid month of year as an integer.}
-
-\item{day}{Day of the observation. It should be a valid day of month as an integer.}
-
-\item{k}{Number of days.}
-
-\item{dateString}{A string that represents a date. If not \code{NULL}, this will be used instead of \code{year}, \code{month}, and \code{day}, and they can be omitted.}
-
-\item{asDateFun}{If \code{dateString} is given, you can use it to convert the string to a \code{Date}. If \code{NULL}, default conversion is used.}
+\item{k}{The number of days in the interval.}
 }
 \value{
-An object of class 'ldtf'. It is also a list with the following members:
-\tabular{ll}{
-\code{class} \tab Determines the class of this frequency.\cr
-\code{year} \tab Determines the \code{year}.\cr
-\code{month} \tab Determines the \code{month}.\cr
-\code{day} \tab Determines the \code{day}.\cr
-\code{k} \tab Determines the value: \code{k}.
-}
+An object of class \code{ldtf}. It is also a list with the following members:
+\item{class}{Determines the class of this frequency.}
+\item{year}{Determines the \code{year}.}
+\item{month}{Determines the \code{month}.}
+\item{day}{Determines the \code{day}.}
+\item{k}{Determines the value: \code{k}.}
 }
 \description{
-Use it to create a frequency for time-series data that occurs every \code{k} days. The first day of the interval is used as the reference.
+Use this function to create a frequency for time-series data that occurs every \code{k} days. The first day of the interval is used as the reference.
 }
 \details{
-In order to use \code{\link{as.frequency}} function for this type of frequency,
+In order to use the \code{\link{as.frequency}} function for this type of frequency,
 you need the following information:
 \itemize{
-\item \strong{Character Format} First day of the interval in \code{"YYYYMMDD"} format.
-\item \strong{Class Id} \code{"d#"} (the number is value: \code{k}; e.g., d3 means every 3 days)
+\item \strong{Character Format}: The first day of the interval in \code{"YYYYMMDD"} format.
+\item \strong{Class Id}: \code{"d#"} (where # is the value of \code{k}; e.g., d3 means every 3 days)
 }
 }
 \examples{
 
-md0 <- f.multi.daily(2023, 1, 2, 4) # This is 2/1/2023. Next observation belongs to 6/1/2023.
+md0 <- f.multi.daily(c(2023, 1, 2), 4) # This is 2/1/2023. Next observation belongs to 6/1/2023.
 
 md0_value_str <-  as.character(md0) # this will be '20230102'.
 md0_class_str <- get.class.id(md0) # this will be 'd4'.

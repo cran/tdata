@@ -13,24 +13,22 @@ data.vesta.fraud(
 )
 }
 \arguments{
-\item{dirPath}{Path to the downloaded data directory.}
+\item{dirPath}{A character string representing the path to the downloaded data directory.}
 
-\item{training}{If \code{FALSE}, it loads test data.}
+\item{training}{A logical value indicating whether to load training data or not. If \code{FALSE}, it loads test data.}
 
-\item{tranDumCols}{A list with \code{name} and \code{values} of (categorical) columns in 'transaction' file to be converted to dummy variables. If \code{training} is \code{FALSE} and this is \code{NULL}, a warning is raised.}
+\item{tranDumCols}{A list with \code{name} and \code{values} of (categorical) columns in the 'transaction' file to be converted to dummy variables. If \code{training} is \code{FALSE} and this is \code{NULL}, a warning is raised.}
 
-\item{idenDumCols}{Similar to \code{tranDumCols} but for 'identity' file.}
+\item{idenDumCols}{Similar to \code{tranDumCols} but for the 'identity' file.}
 
-\item{catMinSkip}{If \code{tranDumCols} or \code{idenDumCols} is \code{NULL}, for a categorical variable, if number of unique values is equal or larger than this value, it is omitted.}
+\item{catMinSkip}{An integer value representing the minimum number of unique values for a categorical variable to be omitted if \code{tranDumCols} or \code{idenDumCols} is \code{NULL}.}
 }
 \value{
 A list with the following items:
-\tabular{ll}{
-\code{data} \tab A \code{data.frame} with the data. \cr
-\code{tranDumCols} \tab A list with \code{name} and \code{values} in 'transaction' data, used for creating the dummy variable. \cr
-\code{idenDumCols} \tab A list with \code{name} and \code{values} in 'identity' data, used for creating the dummy variable.
-}
+\item{data}{A \code{data.frame} with the data.}
+\item{tranDumCols}{A list with \code{name} and \code{values} in 'transaction' data, used for creating dummy variables.}
+\item{idenDumCols}{A list with \code{name} and \code{values} in 'identity' data, used for creating dummy variables.}
 }
 \description{
-Use it to create fraud-series table from 'Vesta' dataset (aka IEEE-CIS Fraud Detection).
+Use this function to create a fraud-series table from the 'Vesta' dataset (aka IEEE-CIS Fraud Detection).
 }
