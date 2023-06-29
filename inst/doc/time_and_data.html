@@ -340,7 +340,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tdata)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tdata)</span></code></pre></div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>In this vignette, I will introduce you to the main features of the
@@ -358,7 +358,7 @@ updates.</em></p>
 can be downloaded from the <code>Quandl</code> package using the
 following code (Note that the end date in this example may differ from
 yours):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>oil_price <span class="ot">&lt;-</span> Quandl<span class="sc">::</span><span class="fu">Quandl</span>(<span class="st">&quot;OPEC/ORB&quot;</span>, <span class="at">start_date=</span><span class="st">&quot;2010-01-01&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>oil_price <span class="ot">&lt;-</span> Quandl<span class="sc">::</span><span class="fu">Quandl</span>(<span class="st">&quot;OPEC/ORB&quot;</span>, <span class="at">start_date=</span><span class="st">&quot;2010-01-01&quot;</span>)</span></code></pre></div>
 <div id="create-a-variable" class="section level3">
 <h3>1. Create a Variable</h3>
 <p>To manipulate data using the <code>tdata</code> package, we generally
@@ -366,13 +366,13 @@ need to create a variable. In this example, we’ll create a variable from
 the oil price data. First, we’ll use the values in the first column to
 define a frequency. Since the first column contains a list of dates,
 we’ll use a ‘List-Date’ frequency:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>start_freq <span class="ot">&lt;-</span> <span class="fu">f.list.date</span>(oil_price<span class="sc">$</span>Date)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>start_freq <span class="ot">&lt;-</span> <span class="fu">f.list.date</span>(oil_price<span class="sc">$</span>Date)</span></code></pre></div>
 <p>Now that we have defined the frequency, we can create a variable
 using the following code:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>var_dl <span class="ot">&lt;-</span> <span class="fu">variable</span>(oil_price<span class="sc">$</span>Value, start_freq, <span class="st">&quot;Oil Price&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>var_dl <span class="ot">&lt;-</span> <span class="fu">variable</span>(oil_price<span class="sc">$</span>Value, start_freq, <span class="st">&quot;Oil Price&quot;</span>)</span></code></pre></div>
 <p>This creates an array where each element is labeled by a date. We can
 print this variable using the <code>print</code> function:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var_dl)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print</span>(var_dl)</span></code></pre></div>
 <pre><code>## Variable:
 ##     Name = Oil Price
 ##     Length = 3466
@@ -381,14 +381,14 @@ print this variable using the <code>print</code> function:</p>
 ##     Fields: NULL</code></pre>
 <p>We can also convert the variable back to a data.frame using the
 <code>as.data.frame</code> function:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_var_dl <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(var_dl)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>df_var_dl <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(var_dl)</span></code></pre></div>
 </div>
 <div id="daily-variable" class="section level3">
 <h3>2. Daily Variable</h3>
 <p>In this section, we’ll convert <code>var_dl</code> to a daily
 variable. This can be done by sorting the data and filling in any gaps.
 The <code>convert.to.daily</code> function can do this for us:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var_daily <span class="ot">&lt;-</span> <span class="fu">convert.to.daily</span>(var_dl)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>var_daily <span class="ot">&lt;-</span> <span class="fu">convert.to.daily</span>(var_dl)</span></code></pre></div>
 <p>Using this function is more efficient than manually sorting the data
 and filling in gaps because <code>var_daily</code>, as a daily variable,
 only stores a single date: the frequency of the first observation. Other
@@ -396,13 +396,13 @@ frequencies (or dates) are inferred from this first date (except for
 ‘Lists’, this is true for other types of frequencies in the
 <code>tdata</code> package). We can print the starting frequency using
 the print function:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var_daily<span class="sc">$</span>startFrequency)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">print</span>(var_daily<span class="sc">$</span>startFrequency)</span></code></pre></div>
 <pre><code>## Frequency: 20100104 (Daily: d)</code></pre>
 <p>Each frequency in the <code>tdata</code> package has a string
 representation and a class ID. We can get these values using the
 following code:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>class_id <span class="ot">&lt;-</span> <span class="fu">get.class.id</span>(var_daily<span class="sc">$</span>startFrequency)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>str_rep <span class="ot">&lt;-</span> <span class="fu">as.character</span>(var_daily<span class="sc">$</span>startFrequency)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>class_id <span class="ot">&lt;-</span> <span class="fu">get.class.id</span>(var_daily<span class="sc">$</span>startFrequency)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>str_rep <span class="ot">&lt;-</span> <span class="fu">as.character</span>(var_daily<span class="sc">$</span>startFrequency)</span></code></pre></div>
 <pre><code>## [1] &quot;class_id: d, str_rep: 20100104&quot;</code></pre>
 <p>Plotting the data is straightforward. We simply convert the data to a
 <code>data.frame</code> using the <code>as.data.frame</code> function
@@ -423,23 +423,204 @@ and returns a scalar value. Summary statistic functions such as
 I’ll use a built-in function to get the last available data point in
 each week as the representative value for that week. Here’s the
 code:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>var_weekly <span class="ot">&lt;-</span> <span class="fu">convert.to.weekly</span>(var_daily, <span class="st">&quot;mon&quot;</span>, <span class="st">&quot;last&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>var_weekly <span class="ot">&lt;-</span> <span class="fu">convert.to.weekly</span>(var_daily, <span class="st">&quot;mon&quot;</span>, <span class="st">&quot;last&quot;</span>)</span></code></pre></div>
 <p>The second argument, <code>&quot;mon&quot;</code>, specifies that the week
 starts on Monday. Note that the weekly frequency points to the first day
 of the week. We can now convert the variable to a
 <code>data.frame</code> and plot it using the following code:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_var_weekly <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(var_weekly)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">las =</span> <span class="dv">2</span>, <span class="at">cex.axis =</span> <span class="fl">0.8</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">factor</span>(<span class="fu">rownames</span>(df_var_weekly)), </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>     df_var_weekly<span class="sc">$</span><span class="st">`</span><span class="at">Oil Price</span><span class="st">`</span>, </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="cn">NULL</span>, <span class="at">ylab =</span> <span class="st">&quot;$&quot;</span>, </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Weekly Oil Price&quot;</span>)</span></code></pre></div>
-<div class="figure">
-<img src="data:image/png;base64,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" alt />
-<p class="caption">Plotting the generated weekly data</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>df_var_weekly <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(var_weekly)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">las =</span> <span class="dv">2</span>, <span class="at">cex.axis =</span> <span class="fl">0.8</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">factor</span>(<span class="fu">rownames</span>(df_var_weekly)), </span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>     df_var_weekly<span class="sc">$</span><span class="st">`</span><span class="at">Oil Price</span><span class="st">`</span>, </span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="cn">NULL</span>, <span class="at">ylab =</span> <span class="st">&quot;$&quot;</span>, </span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Weekly Oil Price&quot;</span>)</span></code></pre></div>
+<div class="float">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAEgCAMAAABrWDzDAAAAvVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZrY6AAA6ADo6AGY6OgA6Ojo6OmY6OpA6ZmY6ZpA6ZrY6kJA6kLY6kNtmAABmADpmAGZmOgBmOjpmOpBmZgBmZjpmkNtmtttmtv+QOgCQOjqQOmaQZjqQkGaQtpCQttuQ2/+2ZgC2Zjq2kDq225C229u22/+2/7a2/9u2///bkDrbtmbbtpDbtrbb25Db27bb29vb/9vb////tmb/25D/27b//7b//9v///97dBisAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAU/0lEQVR4nO2dC3vkphWGWae221yaNHab3tbuLTtNss1O0rT1OLb+/8+q0PUcBAxwQJfR9z7J2liII8E3wOEgjaoAEKCWvgCwbSAgIAICAiIgICACAgIiICAgAgICIiAgIAICAiIgICACAgIiICAgAgICIiAgIAICAiIgICACAgIiICAgAgICIiAgIAICAiIgICACAgIiICAgAgICIiAgIAICAiIgICACAgIiICAgAgICIiAgIGIvAnq5V9dPVfV8q968q6rXR3X1wZ7xMBypM+lTJrz+8IlS6tOvn/o8JONRtXz6nuR3lHMZ7EVAnWROdePeNXK6cWQ8K6CXrzqR/OKDW0CNTCtvORfCXgRUN61u00PdtjdNR3TnyHdOQPVfe/qjNgFdsmYYuxHQSXc9TevXAqkTD3XD/7PuKb5oGnr8tRFQ3UNdvde6+N9j21W1J2hqibx5W2f88bYr0OiBGvn9fK/lWmv2H1+pq++6wz98rNRHb7m17bMbAdWdzk0tjDd/75r2nVZJPxKRX7WAakXUxxtddIoY+qX2UFdgp52pgFoDbXekRagPH9qe6Y5Z2z67EVDTyid19a0evQ66SWtRvO8GM/7r949tB6XPqP/4QOdMZPbUSc0moP/c65+1gK7fV/9tD9d92JdPPzd/J9a2z24E1LT3Ud3Uzdn8r6WgW1A3OflVZ/tj008Mw9MNHcFIu+texjmJ1n85tme1h9s+7Pj5d9TwvDVQhP0IqBbB28e66eqG+5duwloKvcNEfm1HmmaUahu+U1WvkFAB6RKOpBySh1rbPvsRUN1uv7mv2+xUT21vm59DO5Jfu6mKbuy2zfUY1vUZGjaEOQX05vP31URA/XnU2vbZj4CaqWvrYX2if7azmwbyqxbQ9TfjHEj/e3Mc2zpwEt0lXD3QYG377EdA/RpQ48rXjUn6ErqueGjnRK10dJvXMviYrOp0bvzrDz43vk+QobCdA50+/dq3irlBdiSgY+tEDz/rIeitXrFpWpf82q8Tdbpopiyjw0QWEuuM4QKqi/xC56wLJta2z44EpOceD+RntxyjG5n8ejB1oRud+ktjKOO9LZThElC/DnTDrG2fHQno5b5t3Zf7ru1+/lvduTTTXfJrO9RoZ6vXxUnxIef1x9/Xzf/JW3sw1SmgdiX6z4bhzbMjAaUyLgKBKRDQOX7+6jJW/AoBAflp5isXEXMoBATkR0+Yvlz6ItYMBAREQEBABAQEREBAQAQEBERAQEAEBAREQEBABAQEREBAQAQEBERAQEAEBAREQEBABAQEREBAQAQEBERAQEAEBAREQEBABAQEREBAQAQEBERAQEAEBAREQEBABAQERGQWkAIXwlICylscWAoICIi4KAFBlfNzWQKCgqRE12ABAT3/qn35ZPcObvtr30o0dcSMDjiIrsL8Anq5b97y/lCd9PcB3Oj/JMVFUN88FCRk+R7oqH5d90Cn5gXuDy+/fdd2SOl2J+e5z1QYxOYnu4D+/dQrpu6F9K9aRGMp0csH5mX4T4WAZMRXX6k5UM3x+mkioITijPPOSAQKEhH/yS4noKP+opvsAvIpREnKBZoV9UBH/fb+EgI6dxwSkrD8JLoT0LH9tonsk2gPbZFOAUFYfhLrp5CAnn/Zdjvl3PggndAEuqazpCyDFBJQ+5VFD8MX3wiKs52n6GwvsCgIyEdTOSphFrmpUAY5iQpovHmWSbl7I8E1XCijdiI/aNsSkOo7oHY9qJNOd0j1mcbcqvL1U5gujQwVe9k9kCK9jeKrFpYeSCkmp4lN5yi499Eu5vY3JaBeOUQU1XRZm45hg9SsIxhV18TMzkiNI25KQEP/wyZDrrLGgY7NucmZqu+0J31TytVtGzIHiDsve8bixY19zjiSeTRUjZMlOiVSQ8dknM0Gvv1APmRRN79BATXNzlZ4eIubw9FwmE+ZVEV6qPEvzg7r0kkcw7YoIEsRlhXDwSlTg4/BBdR1T6NulOp3C+xRQVMvJOy07BmLF9f7mmSsMcYgVRlqMX5TZDQbtEXUMxnW9gAb3cPvvoCAmuBXt5e11JbWQTzGKuJYtr0OhtHKdNyrieh2p6CepXugZktrHwQrFQszVnAspdkNqN71t2Z0DYrATXYBtVtauzB8+Wh8bDnhM5zddUFpvW92AbVbWruNQHm3tMac48zLAxy+EnanoIGYWy80B3IJKKE4ck7MB8O7upjb2oUR83jLpgQUkdGVN8bF2JGCbLcadvsbElDUiyCcAooxGJF346R3t4UENNsk2kqm0WdHg9jkToMDOqXWgbK78UU8g3Mm96MgE6Usq2XWjMElBttuBNTtZc23pTWuNdEFxWDdqhB495sJZcQ15l6aPg+OzS6XJKDo9cLI/GWLWTs2qWR3VRcW0DJdyk46MsldbkZAJUsvXs4Fsw0BxfYEO+k5MuGurGW8sALFRQsoLvvOcdcuO+La3xBqJfyC8he3mCB2ocRzPZBzy4z/5NSM2YvbRSMuiaeCm0P9Js3YkxMztjzfKv1+l4QdiZMLXXJCs+hkqrTtkBmOqqpK+bbAFBKQfsmmfsNLfChj6rAvK6DLVe/wnK8vT/P/8HymI0eYuZhr6wOqCcFU+7L6UiwroMLFK7qt3H0R/nyFBPT6+KDf1BqxnaP7w2S3u2drxsVTuAfqpzj+XN3jTzMLSE9+rp+mr7hzb2ntH9CZCGjhNZ1FJ0HFZ0HnDZDBy5q72BzoTs+BYnug6eMSS+tn2RnYCoyYDRJ5ekLGhsQdiYqOWEtLp2Xmi+DtVdy42z2nWdhPx+EQUxEkTKI7h3Gc9qxCP3NDHjCO2dqeainABl+Nds1dA+yFZmx4fbxLcOP7adBQeav48otZL2F4cQR/PVZOC4p8PM9uG1NDo1T2yym8kBixI3GsLzUk1jGKzcnw6j42mue2QKr2nICGbP01mRmC7YZfYlpxtDdVPsdxZua+hv7J2VJ2jcBE6AyoX1J0ZThvt/t5qL3z6qiabwMTYJPy+Lf+JtcgoFnpJoKuuFOeIV0RJUSWJ++Bmm8w0N8E9nz7EGf7rN2x2hLv7gLoVu2Ml8+MR8U1Yr77RlxipIBe7m/0DFnPi5uuKKvdcQRbxeS5Z75LIQIZp4P0sGwaO5ZL+vqYk60FxmU8KMpdIbtrmf60zHcpatKwpg/t7bj9ZbMf+Yjuge7aEaxED0QPrkc/c1yKrb8x/0K9b35uyAUqpwkhsXOgw9WHdgQ7SfqfVQlkBbj3S5AxbVz54wNbUBcZEHdPI94LU6r1w0T6gYAIw8Yc6wDFfzFH99DVst69I8k8rGcdaL2Uvta++/HNkOn8mv4MdcyG3is3pQT0+tjMsWf93vg5KHHdzu7HZnhcHxv98cBZtMOLk1FKQPUUW3/p3KzfGz8HoS/ICy+v96y9bcsm09U44rnHvsn54VKLopCAuj0cC70fqCChbz0JLo+86dybiSQ6FY8dyvnrKdL5BNqOzdjQqabAl+4ui8osIBK2cBQ6CWL2cou6EmP5MCOFBHS6/kZHy/K+pXUpaOupUL85sOizNaHsnQd/W/G56ylY26UEVM+gT28yv2RzKYwF4pzyDxp8XCfSwIe/oIKf12I90JN+MuNCBET+rfKukwcIKOSvoS5cAQrOgWoBXcok2lzGzfOJDvXnQheaF6GYG18PYUlPpq6RbgrKPKEcxeZ75bk3R1F1lVxIfMj5ks2l6ZyfPhV3/f020skfw06OsmW1LizBV3j2jIsUVxg1LL+Mf4g4u3c8eUMGRyHkAhIW4C08e8ZFiiuMsY+4irr+UTxGDxR6fripBYCAQpgu+IZ/qo2OJmEQDMnpzFN6yQ0CimDSA4Us4JHVPjUsAWRfS3WWVnrRFgKScH4Zmd6p6sfCKn/H4BNQVkOT8rNnXKS4+Rl7k+mR4V9z1jy6Y9nv37ViXbqiIaBE3EPDsPe0MtpvXAko0Kzm2vRwMdktee1myLhIcaWZXq7Nr2oPjI8m2zuaYjsrbCaK1zMEFITjgRpHnLzrghzbBcvvRTi7RySnrewZe+jXx2cobllsQqms+1LG8cu13bT0U5N01bt8jKycgA7k6+MzFLcsjv5n6uOo8dh0L5i7sJzQPY4b7oFOH43ffJmhuPXh8Hq6H4r2RfMyzp/nMF5KQK9//Xb87l1SyhZ3JHoxwhP9LuX5JiEmo+FNC+h492wTUGpx64W3UvAm03JQCc+goEICevnD034ENIlwLMrwpMYsU6BSAjo8VDsRELmVVdyTsvw2j71cGTUv980852K2tIaxvpnddnugin99fIbiNsA6BDTzNRQW0OVsafWwjjFsIeMIZchZzGNfAxCQnC7wvvRlLAMEJKfYFo0tAAHlYJ41u7PXUC1QrxBQDnK/NSjtGsZ/5zSbPeMixS2MWsENLaMfCCgPM+wyDAIC2ijrWENcMPifMeMixS3NGm5nmWsoJaDn2+blCpeypXUTLFKnpbZz3D8034iwq1jY0iziChYSUPeGsn1F45fmknogTd0L7WBL694pKKDj9dMuNpTtm3IC0l/aDAHNyhKVWkxAzXdjQkDzskCtFnsqo/HeMYmelQvqgfQXrWjgxs/JEq5Jqacy2k31+9jSuhouqAeauziwFBAQEAEBARGLCQhcCAsJaFo+2ATpDZxRLNbywSZIb+CMYrGWDzZBegNnFIu1fLAJ0hs4o1is5YNNkN7AGcViLR9sgvQGzigWa/lgE6Q3cEaxWMsHmyC9gTOKxVo+2ATpDZxRLGCHQEBABAQEREBAQAQEBERAQEAEBAREQEBABAQEREBAQMQMAjpeP1lSr49K3VXdVycYqfbxs+YPNacm0T6H9nJ/5zTQPGx9Gs57uVfXP90qdWMxZ1igKf3I2/eP3WncnNcAT3nhN0TMNfaejUL6Cks04Kk/a2XGUlJA3Zf7dFfPU82TrYe6bjrJ0NShq7L24ddj/e/zZ0/63Va6Df9E5GgYqNv3pE85NvVyuKuOuraPN9XUHLPAUoeHusYfutMMc14DLOWD3RAz9/p4115ga9yosDQDnvrjd5dI0R7o+VbXdP8RYqn23Qynqw/tl7fQ1PDaBnJIf1HZZ09N6vn2xm6gPvb6+EDPa86dGrBaqMZ3RrDTiLlzBkjK89FhNzQtpNFHK/NJhSUY8NWfUZlpFB7C9MsYxiGMpLpWO13/RNqwTVkFdEdSJ/XmncXAeQEZ5pwC+t2HymYuXECV8eoAmmI3xM29/qXr4vo3VxgVlmDAV3+Tykyh9Bzo5f6GzIFIqrvl4zigDam+Ntqhpb739qN5PXye6Es+xyJf7q8+NJ/fcdCqzBQ311ugKWMIo+ZCDPQjjB6NRliK3RAzp98/qSU6Zp9WWKwBT/1NKzOB8pPok6ID7ZB6feya9OrDJHU0p7j1h2R8sYzbQN2V6zeAtsmuTocUNWBYoCk+iTbMeQ3QlBd2Q2wS3Q1GtE8gFZZkwFN/9lc8RQI3HogoKyDuLTO8frWb8NMScxY34F2yKGDAc56RMYmiAjoYwzc75vGrfUUGn5aYs7gB35JFAQO+83jGNIquA3Fnx+JrWv3q8y6qwx3PkbO4Ae+SRX4DvvN4xkTmE5DN17T71WddVMdpOXIWN+BbsihgwHcez5hI2SGMecuGr+nxq30uque0LDmLG/AtWRQw4DuPZ0yj7CSae8sMr1/tJvy0xJzFDXiXLAoY8JxnZEwCbjwQMaOAbKHm/hCPczPHcxL0JgtvzA81gsvcR/UY7+hXfFko22d8cnMu48bdWfzqYbGeGTfvwGk8omrNnQehAX4n8wmIh5o5PM5txMp50Jst/TM/1Agus2Ne48yj4aFsn3HjDtzGzSg+uT0j4m4Y5+6423h41Ro7D4ID/G5m3M7BQs2TY2OYchrqdAa9TYeVh875MadxFvWehrIDI+5+40YQdrw9yxYFapzfgcd4WNVaAsckPptE4ZVoIm0z1Gz4oREC4sFy7rDS0Dk55jNe0aj3NHjtMm7xpB3GfQKybFHgcXR6dy7jwVW7OQExX9MINdNjPM5tj5W7hrCq90ON4DL3UT3G2wvoo95GKNtjnN+Bx7gjit+PJjTibjPeu+Nu4+FVa+w8YHeXxpxe2DTUzI6NcW7mePIotDmJJn6oEVw2fFSfcc0Q9WahbJ9xfv3njI93N/Wrx/0EhnFaiG8SHV61zHhEgN8J3HggYs5ovC/i7jnmKySLAX4s1dzMd1fAeBIzRuO94WRPyNhTSBYDhmubaG7muytgPI0Zo/Fnw8mVNRrvKyTNgNd4qrk045nM5TCeyFICsjjB4zH3ofCU14D7WJ42DDZeQkCJxhOZMRofEE62ReN9haQa8BxLNZdoPI+5LMbTmDMa74u4e475CsligB9LNTfz3RUwngTceCBiOTc+bRv9JELtfDzdFmq2PqbP4tVG8JqHuVnKeG7ek5o8AE9T7ufYUyvMwFN/q4/Gp3qevJCbyr1h3PN4Okud22c9xKt58JqHuY1H143n5t0pM/5CU57n2FMrLLz+Vh+NT/M84zaM+yL1JFLof0yfRXKN2CMJc5spHn/3pVwXZou/81RAhUU/hkB29K86mJrqeUZtGA8UUOV9TN8lIB7m5ilL/N2T4lsIhpQt/m5E40MqLPYxhHFH/6oFlOx5Rm8YD3hYnUW9WYrFq43gNQ9zsxSPv/tSviHM8xx7RIVFP4bAd/SvdQhL9zwpvg3jvsfTLaFmx2P6PF7Ng9c8zE1TPP7uS3kn0e7n2FMrzMBTf4jGg8WBgNaLbwEjS2r1z8YDEd4FjBwpfiiNpd6R6EklnpYntSZzZxYwxCl+KJH5NtVHpBJPy5NajblzCxjiFD+UyIyb6sNTiaflSa3HXMAChizFD6WBOdB68S9gZEjh2XiwOGuJxhfY174N4yu61yRWEo0vsK99G8ZXdK9prCOYWmJf+yaMr+heE4GAIKDVCih1V3iJjeZrNb6ie01jLdH4Avvat2F8RfeaBNx4IKKogLIEiWdOXba5jUXjswSJZ05dtrmNReNzBIlnTl22uY1F47MEiWdOXba5rUXjswSJZ05dtrmNReOzBIlnTl22OUTjwcqAgIAICAiIgICACAgIiICAgAgICIiAgIAICAiIgICACAgIiICAgAgICIiAgIAICAiIgICACAgIiICAgAgICIiAgIAICAiIgICACAgIiPg//BnqRY4oFKkAAAAASUVORK5CYII=" alt="Plotting the generated weekly data" />
+<div class="figcaption">Plotting the generated weekly data</div>
 </div>
 <p>There are other frequency types and conversion functions available in
 the <code>tdata</code> package that you can explore on your own.</p>
+</div>
+</div>
+<div id="other-functions" class="section level2">
+<h2>Other functions</h2>
+<p>In this subsection, I will talk about some other functions in
+<code>tdata</code> package. These are not the main functions, but just
+some related subject to time and data.</p>
+<div id="long-run-growth" class="section level3">
+<h3>1. Long-run growth</h3>
+<p>In this subsection, we will discuss long-run growth and use the tdata
+package to calculate and plot it. First, let’s review some mathematical
+concepts.</p>
+<p>A variable can change continuously or discretely over time. <span class="math display">\[\begin{align}
+&amp;y(t)=y(0)e^{g_1}e^{g_2}\ldots g^{g_t}\\
+&amp;y_t=y_0(1+g_1)(1+g_2)\ldots(1+g_t)
+\end{align}\]</span></p>
+<p>The starting condition is represented by <span class="math inline">\(y_0\)</span> and <span class="math inline">\(y(0)\)</span>, while <span class="math inline">\(y_t\)</span> and <span class="math inline">\(y(t)\)</span> represents the value of the variable
+<span class="math inline">\(t\)</span> periods. The <span class="math inline">\(g_i \times 100\)</span> for <span class="math inline">\(i=1\ldots t\)</span> are the discrete or
+continuous growth rates in different periods.</p>
+<p>Recall that we have two formulas for calculating growth rate in one
+period: <span class="math display">\[\begin{align}
+&amp;G_c=(\ln{\frac{y(t+1)}{y(t)}})\times 100\\
+&amp;G_d=(\frac{y_{t+1}}{y_t}-1)\times 100
+\end{align}\]</span></p>
+<p>for <span class="math inline">\(y_i&gt;0\)</span> for all <span class="math inline">\(i\)</span>. Also, recall that we have this
+approximation: <span class="math inline">\(ln(1+x) \approx x\)</span>
+when <span class="math inline">\(x\)</span> is small. Therefore, it
+might not be important which one we choose for variables such as GDP.
+However, assume that the growth rates are large, e.g., in one period the
+value increases from 1 to 2. It is clear that the growth rate is 100%.
+Using the continuous formula gives us 69.3% and by using the discrete
+one we get 100%. Does this mean the continuous formula is wrong?
+Definitely not. When we say “the value increases from 1 to 2”, we are
+assuming that the growth is discrete. Therefore, if you are wondering
+which of these formulas to use, think about your assumptions and your
+mathematical model. It is generally easier to work with the continuous
+formula because the derivative of <span class="math inline">\(ln\)</span> is easier to compute.</p>
+<p>Interest rate is a similar concept to growth rate, and let’s study
+these formulas from that perspective. Assume that you lend <span class="math inline">\(y_0\)</span> amount of money at time <span class="math inline">\(t=0\)</span>. If the annual interest rate is <span class="math inline">\(r\)</span>, at the end of the first year you will
+have <span class="math inline">\(y_0*(1+r)\)</span>. Let’s assume that
+interest is paid monthly and you lend the interest too. At the end of
+the first month, you will have <span class="math inline">\(y_0*(1+\frac{r}{12})\)</span>. Then, at the end of
+the second month, you will have <span class="math inline">\(y_0*(1+\frac{r}{12})^2\)</span>. And so on. At the
+end of the year, you will have <span class="math inline">\(y_0*(1+\frac{r}{12})^12\)</span>. At the end of
+the second year, you will have <span class="math inline">\(y_0*(1+\frac{r}{12})^24\)</span>. At the end of
+<span class="math inline">\(t\)</span> years, you will have <span class="math inline">\(y_0*(1+\frac{r}{12})^12t\)</span>. We can
+similarly split the year into smaller periods and calculate the limit
+when we move from 12 toward infinity in the formula. If we use
+L’Hopital’s rule and calculate such a limit, we will find the continuous
+formula: <span class="math inline">\(y_t=y_0 e^{rt}\)</span>. Compared
+to the previos discussion, we have one scalar value <span class="math inline">\(r\)</span> here.</p>
+<p>Let’s get back to the long-run formulas. We are looking for a scalar
+value <span class="math inline">\(g\)</span> in which we can summarize
+all the other <span class="math inline">\(g_i\)</span>s, such that:
+<span class="math display">\[\begin{align}
+&amp;y(t)=y(0)e^{g_c t}\\
+&amp;y_t=y_0(1+g_d)^t
+\end{align}\]</span></p>
+<p>This single value does what all other growth rates achieve together:
+it take us from the starting point (<span class="math inline">\(y_0\)</span> or <span class="math inline">\(y(0)\)</span>) to the end point (<span class="math inline">\(y_t\)</span> or <span class="math inline">\(y(t)\)</span>). We call <span class="math inline">\(\bar{G}_c = g_c\times 100\)</span> and <span class="math inline">\(\bar{G}_d=g_d \times 100\)</span> the continuous
+and discrete long-run growth rates. It is important to note that <span class="math inline">\(\bar{G}_c\)</span> and <span class="math inline">\(\bar{G}_d\)</span> are not exactly equal (The
+discussion is similar to the discussion about <span class="math inline">\(G_c\)</span> and <span class="math inline">\(G_d\)</span> above).</p>
+<p>Given the data <span class="math inline">\(\{y_i\}_{i=0}^t\)</span>
+where <span class="math inline">\(y_i&gt;0\)</span> for all <span class="math inline">\(i\)</span>, the following formula calculates the
+long-run continuous growth rates: <span class="math display">\[\begin{align}
+&amp;\bar{G}_c = \frac{\ln{\frac{y(t)}{y(0)}}}{t}\times 100\\
+&amp;\bar{G}_c = \frac{G_{c1}+G_{c2}+\ldots+G_{ct}}{t}
+\end{align}\]</span></p>
+<p>in which <span class="math inline">\(G_{ci}\)</span> is the
+continuous growth rate at period <span class="math inline">\(i\)</span>.
+Recall that <span class="math inline">\(\ln{x}+ln{y}=\ln{xy}\)</span>
+for <span class="math inline">\(x,y\in\mathbb{R}\)</span>.</p>
+<p>The two similar formulas for the discrete case are:</p>
+<p><span class="math display">\[\begin{align}
+&amp;\bar{G}_d = (\frac{y_t}{y_0}-1)^{\frac{1}{t}}\times 100\\
+&amp;\bar{G}_d =(\sqrt[t]{\Pi_{i=1}^{t}(1+\frac{G_{di}}{100})}-1)\times
+100
+\end{align}\]</span></p>
+<p>These are more complicated compared to the continuous case. As I said
+before, it is much easier to deal with continuous assumption.</p>
+<p>It is important to note that the formulas for calculating growth
+rates may not be applicable when the data can be negative or <span class="math inline">\(\{y_i\}_{i=0}^t\)</span> contains negative values.
+In such cases, alternative methods may be needed to measure growth or
+change over time. One possible approach is to add a constant to all
+values to make them positive before calculating the growth rates.
+However, this approach may not always be suitable and it is crucial to
+carefully evaluate the context of the data before applying any
+transformation.</p>
+<p>The following code creates two <code>tdata</code> variables which
+contain the real GDP per capita (PPP) of Korea and Iran from 1990 to
+2021. Data source is “World Development Indicators” and data code is
+“NY.GDP.PCAP.PP.KD”.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>y_kor <span class="ot">&lt;-</span> <span class="fu">variable</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">12656</span>, <span class="dv">13882</span>, <span class="dv">14591</span>, <span class="dv">15436</span>, <span class="dv">16698</span>, <span class="dv">18120</span>, <span class="dv">19365</span>, <span class="dv">20368</span>, <span class="dv">19184</span>, <span class="dv">21233</span>, <span class="dv">22964</span>, <span class="dv">23894</span>, <span class="dv">25591</span>, <span class="dv">26260</span>, <span class="dv">27516</span>, <span class="dv">28641</span>, <span class="dv">29991</span>, <span class="dv">31570</span>, <span class="dv">32275</span>, <span class="dv">32364</span>, <span class="dv">34394</span>, <span class="dv">35389</span>, <span class="dv">36049</span>, <span class="dv">37021</span>, <span class="dv">37967</span>, <span class="dv">38829</span>, <span class="dv">39815</span>, <span class="dv">40957</span>, <span class="dv">41966</span>, <span class="dv">42759</span>, <span class="dv">42397</span>, <span class="dv">44232</span>),</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>                    <span class="at">startFrequency =</span> <span class="fu">f.yearly</span>(<span class="dv">1990</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>                    <span class="at">name =</span> <span class="st">&quot;Korea, GDP per capita, PPP (constant 2017 international $), World Bank&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>y_iri <span class="ot">&lt;-</span> <span class="fu">variable</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">9442</span>, <span class="dv">10240</span>, <span class="dv">10331</span>, <span class="dv">10114</span>, <span class="dv">9904</span>, <span class="dv">10007</span>, <span class="dv">10504</span>, <span class="dv">10495</span>, <span class="dv">10548</span>, <span class="dv">10590</span>, <span class="dv">11026</span>, <span class="dv">11098</span>, <span class="dv">11879</span>, <span class="dv">12786</span>, <span class="dv">13127</span>, <span class="dv">13329</span>, <span class="dv">13781</span>, <span class="dv">14690</span>, <span class="dv">14526</span>, <span class="dv">14474</span>, <span class="dv">15099</span>, <span class="dv">15302</span>, <span class="dv">14542</span>, <span class="dv">14113</span>, <span class="dv">14539</span>, <span class="dv">14011</span>, <span class="dv">14969</span>, <span class="dv">15163</span>, <span class="dv">14629</span>, <span class="dv">14084</span>, <span class="dv">14432</span>, <span class="dv">15005</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>                    <span class="at">startFrequency =</span> <span class="fu">f.yearly</span>(<span class="dv">1990</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>                    <span class="at">name =</span> <span class="st">&quot;Iran, Rep., GDP per capita, PPP (constant 2017 international $), World Bank&quot;</span>)</span></code></pre></div>
+<p>We can use the <code>get.longrun.growth</code> function to calculate
+the long-run growth rates and plot the trends.</p>
+<div class="float">
+<img src="data:image/png;base64,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" alt="GDP per capita of IRI and KOR: Data and longrun trend over time" />
+<div class="figcaption">GDP per capita of IRI and KOR: Data and longrun
+trend over time</div>
+</div>
+</div>
+<div id="na-starategies" class="section level3">
+<h3>2. NA starategies</h3>
+<p>Data cleaning is a crucial early step in the data analytics process,
+which may involve handling missing or NA observations. There are several
+methods to deal with missing values, including replacing them with
+substitutes from other records or datasets, estimating values based on
+other available information through imputation, or using a mathematical
+function to fit a curve to the available data points through
+interpolation. However, sometimes it may be necessary to remove
+<code>NA</code> observations from the data before analysis. In this
+section, we will discuss a common scenario when working with
+cross-sectional data where NA values exist in some variables.</p>
+<p>Let’s begin with a simple example. Consider the following data table,
+where the variables are in columns and the observations are in rows:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{c|ccc}
+   &amp; V_1 &amp; V_2 &amp; V_3 \\
+   \hline
+O_1 &amp; 1  &amp; 2  &amp; 3 \\
+O_2 &amp; 4  &amp; NA &amp; 5 \\
+O_3 &amp; 7  &amp; NA &amp; 9 \\
+O_4 &amp; 10  &amp; 11  &amp; 12
+\end{array}
+\end{equation}\]</span></p>
+<p>If we remove <span class="math inline">\(V_2\)</span>, the resulting
+data table will have 8 observations. However, if we remove <span class="math inline">\(O_2\)</span> and <span class="math inline">\(O_3\)</span> observations, the final data table
+will have only 6 observations. Assuming that all observations are
+equally important, removing <span class="math inline">\(V_2\)</span>
+would be the best strategy. Now, consider the following structure:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{c|ccc}
+   &amp; V_1 &amp; V_2 &amp; V_3 \\
+   \hline
+O_1 &amp; NA  &amp; 2  &amp; NA \\
+O_2 &amp; 4  &amp; 5 &amp; 5 \\
+O_3 &amp; NA  &amp; 6 &amp; 9 \\
+O_4 &amp; NA  &amp; 11  &amp; 12
+\end{array}
+\end{equation}\]</span></p>
+<p>In this case, the best strategy would be to remove <span class="math inline">\(V_1\)</span> and <span class="math inline">\(O_1\)</span>. Now, consider the following data
+table:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{c|ccc}
+   &amp; V_1 &amp; V_2 &amp; V_3 &amp; V_4\\
+   \hline
+O_1 &amp; NA  &amp; 2  &amp; NA &amp; NA \\
+O_2 &amp; 5  &amp; 6 &amp; 7 &amp; 8 \\
+O_3 &amp; 9  &amp; NA &amp; 11 &amp; 12 \\
+O_4 &amp; 13  &amp; 14  &amp; NA &amp; NA \\
+O_5 &amp; 17  &amp; 18  &amp; 19 &amp; 20 \\
+\end{array}
+\end{equation}\]</span></p>
+<p>Can you see what the best strategy would be in this case? What if it
+is more important to keep variables instead of observations.</p>
+<p>The <code>remove.na.strategies</code> function in the
+<code>tdata</code> package can help you decide on a proper order for
+removing columns and rows. Here is an example using the data from the
+previous example:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>st <span class="ot">&lt;-</span> <span class="fu">remove.na.strategies</span>(<span class="at">data =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="cn">NA</span>,<span class="dv">2</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="cn">NA</span>,</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>                                           <span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="dv">17</span>,<span class="dv">18</span>,<span class="dv">19</span>,<span class="dv">20</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>                                         <span class="at">ncol =</span> <span class="dv">4</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>                                         <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<p>The first element of the output shows the best strategy where the
+final data table has 9 observations by removing columns with indices
+reported in <code>colRemove</code> (which is 2) and rows with indices
+reported in <code>rowRemove</code> (which is 1, 4). The second-best
+strategy results in a final matrix with 8 observations and suggests
+removing rows with indices reported in <code>rowRemove</code> (which is
+1, 3, 4) and no columns.</p>
+<p>We can use the <code>countFun</code> argument to increase the weight
+of columns. For example, if we use
+<code>countFun = function(nRows, nCols) nRows * nCols^2</code>, the best
+strategy would be to remove rows with indices reported in
+<code>rowRemove</code> (which is 1, 3, 4).</p>
 </div>
 </div>
 

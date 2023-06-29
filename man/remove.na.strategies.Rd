@@ -30,7 +30,6 @@ Use \code{NULL} to disable it.}
 A list of lists, each with the following elements:
 \item{nRows}{The number of rows in the matrix.}
 \item{nCols}{The number of columns in the matrix.}
-\item{colFirst}{Whether to remove columns or rows first.}
 \item{colRemove}{The indices of the columns to be removed.}
 \item{rowRemove}{The indices of the rows to be removed.}
 }

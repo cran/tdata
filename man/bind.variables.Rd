@@ -28,8 +28,6 @@ It creates lags of exogenous variables or omits \code{NaN}s to make data availab
 A list with the following members:
 \item{data}{A numeric matrix representing the final data after the requested fixes. It is a matrix with variables in the columns and frequencies as the row names.}
 \item{info}{An integer matrix containing information about the columns of the final data, such as range of data, missing data, lags/leads, etc.}
-\item{startFrequency}{The start frequency of the data.}
-\item{startClass}{The frequency class of the data.}
 }
 \description{
 Use this function to bind variables with the same class of frequency together.
