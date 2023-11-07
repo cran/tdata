@@ -44,8 +44,8 @@ IndexRange Array<Tw>::GetRange(const Tw *data, const Ti &length) {
     return IndexRange(start, end);
 
   } else if constexpr (true) {
-    throw std::logic_error(
-        "invalid operation.Type has no NA defined."); // there is no NAN
+    throw LdtException(ErrorType::kLogic, "array",
+                       "'Type' has no NA defined"); // there is no NAN
   }
 }
 
@@ -78,8 +78,8 @@ IndexRange Array<Tw>::GetRange(const Tw *data, const Ti &length,
     return IndexRange(start, end);
 
   } else if constexpr (true) {
-    throw std::logic_error(
-        "invalid operation.Type has no NA defined."); // there is no NAN
+    throw LdtException(ErrorType::kLogic, "array",
+                       "'Type' has no NA defined"); // there is no NAN
   }
 }
 
@@ -119,19 +119,20 @@ IndexRange Array<Tw>::Interpolate(Tw *data, const Ti &length, Ti &count) {
     }
     return range;
   } else if constexpr (true)
-    throw std::logic_error("invalid operation"); // there is no NAN
+    throw LdtException(ErrorType::kLogic, "array",
+                       "invalid operation"); // there is no NAN
 }
 
 template <typename Tw>
-void Array<Tw>::PartitionEqual(const std::vector<Tv> &data,
-                               std::vector<std::vector<Tv>> &result, Ti size,
+void Array<Tw>::PartitionEqual(const std::vector<Tw> &data,
+                               std::vector<std::vector<Tw>> &result, Ti size,
                                bool fromEnd) {
   result.clear();
   if (fromEnd) {
     for (Ti i = (Ti)data.size(); i >= 0; i -= size) {
       int start = std::max(i - size, 0);
       result.insert(result.begin(),
-                    std::vector<Tv>(data.begin() + start, data.begin() + i));
+                    std::vector<Tw>(data.begin() + start, data.begin() + i));
     }
   } else {
     for (Ti i = 0; i < (Ti)data.size(); i += size) {
@@ -139,6 +140,42 @@ void Array<Tw>::PartitionEqual(const std::vector<Tv> &data,
       result.emplace_back(data.begin() + i, data.begin() + end);
     }
   }
+}
+
+template <typename Tw> void Array<Tw>::BoxCox0(Tw &value, const Tw &lambda) {
+  if (std::isnan(lambda))
+    return;
+  if (lambda != 0) {
+    value = (std::pow(value, lambda) - 1) / lambda;
+  } else {
+    value = std::log(value);
+  }
+}
+
+template <typename Tw> void Array<Tw>::BoxCoxInv0(Tw &value, const Tw &lambda) {
+  if (std::isnan(lambda))
+    return;
+  if (lambda != 0) {
+    value = std::exp(lambda * value + 1);
+  } else {
+    value = std::exp(value);
+  }
+}
+
+template <typename Tw>
+void Array<Tw>::BoxCox(Tw *data, const Ti &length, const Tw &lambda) {
+  if (std::isnan(lambda))
+    return;
+  for (Ti i = 0; i < length; i++)
+    Array<Tw>::BoxCox0(data[i], lambda);
+}
+
+template <typename Tw>
+void Array<Tw>::BoxCoxInv(Tw *data, const Ti &length, const Tw &lambda) {
+  if (std::isnan(lambda))
+    return;
+  for (Ti i = 0; i < length; i++)
+    Array<Tw>::BoxCoxInv0(data[i], lambda);
 }
 
 template class ldt::Array<Tv>;

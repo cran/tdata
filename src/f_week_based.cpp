@@ -23,9 +23,10 @@ FrequencyWeekBased::FrequencyWeekBased(boost::gregorian::date day, bool isWeek,
 
   if ((mClass == FrequencyClass::kWeekly || mClass == FrequencyClass::kDaily) &&
       range)
-    throw std::logic_error(
-        "Invalid argument: 'range' should be null for a daily or weekly "
-        "frequencies.");
+    throw LdtException(
+        ErrorType::kLogic, "freq-weekbased",
+        "invalid argument: 'range' should be null for a daily or weekly "
+        "frequencies");
 
   if (range) {
     if (mRange.IsOutsideRange((DayOfWeek)(Ti)day.day_of_week(), forward,
@@ -40,37 +41,32 @@ FrequencyWeekBased::FrequencyWeekBased(boost::gregorian::date day, bool isWeek,
 
 std::unique_ptr<FrequencyWeekBased>
 FrequencyWeekBased::Weekly(boost::gregorian::date day) {
-  return std::unique_ptr<FrequencyWeekBased>(
-      new FrequencyWeekBased(day, true, nullptr, true));
+  return std::make_unique<FrequencyWeekBased>(day, true, nullptr, true);
 }
 
 std::unique_ptr<FrequencyWeekBased>
 FrequencyWeekBased::MultiWeekly(boost::gregorian::date day, Ti multi) {
-  return std::unique_ptr<FrequencyWeekBased>(
-      new FrequencyWeekBased(day, true, nullptr, true, multi));
+  return std::make_unique<FrequencyWeekBased>(day, true, nullptr, true, multi);
 }
 
 std::unique_ptr<FrequencyWeekBased>
 FrequencyWeekBased::Daily(boost::gregorian::date day) {
-  return std::unique_ptr<FrequencyWeekBased>(
-      new FrequencyWeekBased(day, false, nullptr, true));
+  return std::make_unique<FrequencyWeekBased>(day, false, nullptr, true);
 }
 
 std::unique_ptr<FrequencyWeekBased>
 FrequencyWeekBased::MultiDaily(boost::gregorian::date day, Ti multi) {
-  return std::unique_ptr<FrequencyWeekBased>(
-      new FrequencyWeekBased(day, false, nullptr, true, multi));
+  return std::make_unique<FrequencyWeekBased>(day, false, nullptr, true, multi);
 }
 
 std::unique_ptr<FrequencyWeekBased>
 FrequencyWeekBased::DailyInWeek(boost::gregorian::date day,
                                 DayOfWeekRange range, bool forward) {
-  return std::unique_ptr<FrequencyWeekBased>(
-      new FrequencyWeekBased(day, false, &range, forward));
+  return std::make_unique<FrequencyWeekBased>(day, false, &range, forward);
 }
 
 std::unique_ptr<Frequency> FrequencyWeekBased::Clone() const {
-  return std::unique_ptr<FrequencyWeekBased>(new FrequencyWeekBased(*this));
+  return std::make_unique<FrequencyWeekBased>(*this);
 }
 
 void FrequencyWeekBased::Next(Ti steps) {
@@ -105,7 +101,8 @@ void FrequencyWeekBased::Next(Ti steps) {
   } break;
 
   default:
-    throw std::logic_error("not implemented: next: week-based frequency");
+    throw LdtException(ErrorType::kLogic, "freq-weekbased",
+                       "not implemented: next: week-based frequency");
   }
 }
 
@@ -151,12 +148,14 @@ Ti FrequencyWeekBased::Minus(Frequency const &other) {
   }
   case FrequencyClass::kMultiDaily: {
     if (mMulti != second.mMulti)
-      throw std::logic_error("Minus failed. Frequencies are not consistent.");
+      throw LdtException(ErrorType::kLogic, "freq-weekbased",
+                         "minus failed. Frequencies are not consistent");
 
     return ((mDay - second.mDay).days() / mMulti);
   }
   default:
-    throw std::logic_error("not implemented: minus: week-based frequency");
+    throw LdtException(ErrorType::kLogic, "freq-weekbased",
+                       "not implemented: minus: week-based frequency");
   }
 }
 
@@ -181,15 +180,21 @@ void FrequencyWeekBased::Parse0(const std::string &str,
       SplitMultiple(classStr, std::string(":"), parts);
       result.mRange = DayOfWeekRange::Parse(parts.at(1));
     } else
-      throw std::logic_error("Invalid class for a week-based frequency");
+      throw LdtException(ErrorType::kLogic, "freq-weekbased",
+                         "invalid class for a week-based frequency");
   } catch (...) {
-    Rethrow(
-        (std::string(
-             "Parsing week-based frequency failed. Invalid format. class=") +
-         std::to_string((int)fClass) + std::string(", str=") + str +
-         std::string(", classStr=") + classStr)
-            .c_str(),
-        true);
+
+    try {
+      std::rethrow_exception(std::current_exception());
+    } catch (const std::exception &e) {
+      throw LdtException(
+          ErrorType::kLogic, "freq-weekbased",
+          std::string(
+              "Parsing week-based frequency failed. Invalid format. class=") +
+              std::to_string((int)fClass) + std::string(", str=") + str +
+              std::string(", classStr=") + classStr,
+          &e);
+    }
   }
 }
 
@@ -210,6 +215,7 @@ std::string FrequencyWeekBased::ToClassString(bool details) const {
   case FrequencyClass::kDailyInWeek:
     return std::string("i:") + mRange.ToString();
   default:
-    throw std::logic_error("invalid class type");
+    throw LdtException(ErrorType::kLogic, "freq-weekbased",
+                       "invalid class type");
   }
 }

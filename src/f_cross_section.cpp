@@ -14,8 +14,7 @@ FrequencyCrossSection::FrequencyCrossSection(Ti position) {
 }
 
 std::unique_ptr<Frequency> FrequencyCrossSection::Clone() const {
-  return std::unique_ptr<FrequencyCrossSection>(
-      new FrequencyCrossSection(*this));
+  return std::make_unique<FrequencyCrossSection>(*this);
 }
 
 void FrequencyCrossSection::Next(Ti steps) { mPosition += steps; }
@@ -41,7 +40,14 @@ void FrequencyCrossSection::Parse0(const std::string &str,
   try {
     result.mPosition = std::stoi(str, nullptr, 10);
   } catch (...) {
-    Rethrow("Parsing cross-section frequency failed. Invalid format.");
+
+    try {
+      std::rethrow_exception(std::current_exception());
+    } catch (const std::exception &e) {
+      throw LdtException(
+          ErrorType::kLogic, "freq-cs",
+          "Parsing cross-section frequency failed. Invalid format.", &e);
+    }
   }
 }
 

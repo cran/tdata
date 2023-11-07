@@ -125,10 +125,6 @@
     .Call('_tdata_F_Minus', PACKAGE = 'tdata', freq1, freq2)
 }
 
-.Get_Descriptive <- function(w, type, skipNAN) {
-    .Call('_tdata_Get_Descriptive', PACKAGE = 'tdata', w, type, skipNAN)
-}
-
 .Variable <- function(data, name, startFrequency, fields) {
     .Call('_tdata_Variable', PACKAGE = 'tdata', data, name, startFrequency, fields)
 }

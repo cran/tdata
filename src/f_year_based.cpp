@@ -16,15 +16,15 @@ FrequencyYearBased::FrequencyYearBased(Ti year, Ti partitionCount, Ti position,
   mPosition = position;
 
   if (mPartitionCount <= 0)
-    throw std::logic_error(
-        "Invalid argument: Number of partitions must be positive.");
+    throw LdtException(ErrorType::kLogic, "freq-yearbased",
+                       "number of partitions must be positive");
   if (mPosition <= 0)
-    throw std::logic_error(
-        "Invalid argument: Current position must be positive.");
+    throw LdtException(ErrorType::kLogic, "freq-yearbased",
+                       "current position must be positive");
   if (mPosition > mPartitionCount)
-    throw std::logic_error(
-        "Invalid argument: Current position must be equal or less than the "
-        "number of partitions.");
+    throw LdtException(ErrorType::kLogic, "freq-yearbased",
+                       "current position must be equal or less than the "
+                       "number of partitions");
 
   if (yearMulti == 1) {
     if (partitionCount == 1)
@@ -45,41 +45,35 @@ FrequencyYearBased::FrequencyYearBased(Ti year, Ti partitionCount, Ti position,
 
 std::unique_ptr<FrequencyYearBased>
 FrequencyYearBased::XTimesZYear(Ti year, Ti X, Ti position, Ti Z) {
-  return std::unique_ptr<FrequencyYearBased>(
-      new FrequencyYearBased(year, X, position, Z));
+  return std::make_unique<FrequencyYearBased>(year, X, position, Z);
 }
 
 std::unique_ptr<FrequencyYearBased>
 FrequencyYearBased::XTimesAYear(Ti year, Ti X, Ti position) {
-  return std::unique_ptr<FrequencyYearBased>(
-      new FrequencyYearBased(year, X, position, 1));
+  return std::make_unique<FrequencyYearBased>(year, X, position, 1);
 }
 
 std::unique_ptr<FrequencyYearBased> FrequencyYearBased::Yearly(Ti year) {
-  return std::unique_ptr<FrequencyYearBased>(
-      new FrequencyYearBased(year, 1, 1, 1));
+  return std::make_unique<FrequencyYearBased>(year, 1, 1, 1);
 }
 
 std::unique_ptr<FrequencyYearBased>
 FrequencyYearBased::MultiYearly(Ti year, Ti yearMulti) {
-  return std::unique_ptr<FrequencyYearBased>(
-      new FrequencyYearBased(year, 1, 1, yearMulti));
+  return std::make_unique<FrequencyYearBased>(year, 1, 1, yearMulti);
 }
 
 std::unique_ptr<FrequencyYearBased> FrequencyYearBased::Quarterly(Ti year,
                                                                   Ti quarter) {
-  return std::unique_ptr<FrequencyYearBased>(
-      new FrequencyYearBased(year, 4, quarter, 1));
+  return std::make_unique<FrequencyYearBased>(year, 4, quarter, 1);
 }
 
 std::unique_ptr<FrequencyYearBased> FrequencyYearBased::Monthly(Ti year,
                                                                 Ti month) {
-  return std::unique_ptr<FrequencyYearBased>(
-      new FrequencyYearBased(year, 12, month, 1));
+  return std::make_unique<FrequencyYearBased>(year, 12, month, 1);
 }
 
 std::unique_ptr<Frequency> FrequencyYearBased::Clone() const {
-  return std::unique_ptr<FrequencyYearBased>(new FrequencyYearBased(*this));
+  return std::make_unique<FrequencyYearBased>(*this);
 }
 
 void FrequencyYearBased::Next(Ti steps) {
@@ -180,10 +174,17 @@ void FrequencyYearBased::Parse0(const std::string &str,
             std::stoi(parts0.at(0), nullptr, 10); // partition comes first
         result.mYearMulti = std::stoi(parts0.at(1), nullptr, 10);
       } else
-        throw std::logic_error("Invalid class for a year-based frequency");
+        throw LdtException(ErrorType::kLogic, "freq-yearbased",
+                           "invalid class for a year-based frequency");
     }
   } catch (...) {
-    Rethrow("Parsing year-based frequency failed. Invalid format.");
+    try {
+      std::rethrow_exception(std::current_exception());
+    } catch (const std::exception &e) {
+      throw LdtException(ErrorType::kLogic, "freq-yearbased",
+                         "Parsing year-based frequency failed. Invalid format.",
+                         &e);
+    }
   }
 }
 
@@ -200,7 +201,8 @@ std::string FrequencyYearBased::ToString() const {
   case FrequencyClass::kXTimesZYears:
     return std::to_string(mYear) + std::string(":") + std::to_string(mPosition);
   default:
-    throw std::logic_error("invalid class type");
+    throw LdtException(ErrorType::kLogic, "freq-yearbased",
+                       "invalid class type");
   }
 }
 
@@ -221,6 +223,7 @@ std::string FrequencyYearBased::ToClassString(bool details) const {
            std::string("z") +
            std::to_string(mYearMulti); // partition comes first
   default:
-    throw std::logic_error("invalid class type");
+    throw LdtException(ErrorType::kLogic, "freq-yearbased",
+                       "invalid class type");
   }
 }

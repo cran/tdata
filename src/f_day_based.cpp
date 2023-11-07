@@ -15,15 +15,15 @@ FrequencyDayBased::FrequencyDayBased(FrequencyWeekBased &day, Ti partitionCount,
   mPosition = position;
 
   if (mPartitionCount <= 0)
-    throw std::logic_error(
-        "Invalid argument: Number of partitions must be positive.");
+    throw LdtException(ErrorType::kLogic, "freq-daybased",
+                       "number of partitions must be positive");
   if (mPosition <= 0)
-    throw std::logic_error(
-        "Invalid argument: Current position must be positive.");
+    throw LdtException(ErrorType::kLogic, "freq-daybased",
+                       "current position must be positive");
   if (mPosition > mPartitionCount)
-    throw std::logic_error(
-        "Invalid argument: Current position must be equal or less than the "
-        "number of partitions.");
+    throw LdtException(ErrorType::kLogic, "freq-daybased",
+                       "current position must be equal or less than the "
+                       "number of partitions");
 
   if (partitionCount == 24)
     this->mClass = FrequencyClass::kHourly;
@@ -37,30 +37,26 @@ FrequencyDayBased::FrequencyDayBased(FrequencyWeekBased &day, Ti partitionCount,
 
 std::unique_ptr<FrequencyDayBased>
 FrequencyDayBased::XTimesADay(FrequencyWeekBased &day, Ti X, Ti position) {
-  return std::unique_ptr<FrequencyDayBased>(
-      new FrequencyDayBased(day, X, position));
+  return std::make_unique<FrequencyDayBased>(day, X, position);
 }
 
 std::unique_ptr<FrequencyDayBased>
 FrequencyDayBased::Hourly(FrequencyWeekBased &day, Ti hour) {
-  return std::unique_ptr<FrequencyDayBased>(
-      new FrequencyDayBased(day, 24, hour));
+  return std::make_unique<FrequencyDayBased>(day, 24, hour);
 }
 
 std::unique_ptr<FrequencyDayBased>
 FrequencyDayBased::Minutely(FrequencyWeekBased &day, Ti minute) {
-  return std::unique_ptr<FrequencyDayBased>(
-      new FrequencyDayBased(day, 1440, minute));
+  return std::make_unique<FrequencyDayBased>(day, 1440, minute);
 }
 
 std::unique_ptr<FrequencyDayBased>
 FrequencyDayBased::Secondly(FrequencyWeekBased &day, Ti second) {
-  return std::unique_ptr<FrequencyDayBased>(
-      new FrequencyDayBased(day, 86400, second));
+  return std::make_unique<FrequencyDayBased>(day, 86400, second);
 }
 
 std::unique_ptr<Frequency> FrequencyDayBased::Clone() const {
-  return std::unique_ptr<FrequencyDayBased>(new FrequencyDayBased(*this));
+  return std::make_unique<FrequencyDayBased>(*this);
 }
 
 void FrequencyDayBased::Next(Ti steps) {
@@ -149,9 +145,17 @@ void FrequencyDayBased::Parse0(const std::string &str,
     else if (fClass == FrequencyClass::kXTimesADay)
       result.mPartitionCount = std::stoi(parts2.at(0).substr(2), nullptr, 10);
     else
-      throw std::logic_error("Invalid class for a day-based frequency");
+      throw LdtException(ErrorType::kLogic, "freq-daybased",
+                         "invalid class for a day-based frequency");
   } catch (...) {
-    Rethrow("Parsing day-based frequency failed. Invalid format.");
+
+    try {
+      std::rethrow_exception(std::current_exception());
+    } catch (const std::exception &e) {
+      throw LdtException(ErrorType::kLogic, "freq-daybased",
+                         "Parsing day-based frequency failed. Invalid format.",
+                         &e);
+    }
   }
 }
 
@@ -164,7 +168,8 @@ std::string FrequencyDayBased::ToString() const {
   case FrequencyClass::kXTimesADay:
     return mDay.ToString() + std::string(":") + std::to_string(mPosition);
   default:
-    throw std::logic_error("invalid class type");
+    throw LdtException(ErrorType::kLogic, "freq-daybased",
+                       "invalid class type");
   }
 }
 
@@ -181,6 +186,7 @@ std::string FrequencyDayBased::ToClassString(bool details) const {
            std::string("|") + mDay.ToClassString();
   }
   default:
-    throw std::logic_error("invalid class type");
+    throw LdtException(ErrorType::kLogic, "freq-daybased",
+                       "invalid class type");
   }
 }

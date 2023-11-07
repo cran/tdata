@@ -17,8 +17,9 @@ FrequencyList<T>::FrequencyList(T value, std::vector<T> *items) {
   else if constexpr (std::is_same<T, boost::gregorian::date>())
     this->mClass = FrequencyClass::kListDate;
   else if constexpr (true)
-    throw std::logic_error("Error in initializing a list frequency: only "
-                           "'string' and 'date' is implemented.");
+    throw LdtException(ErrorType::kLogic, "freq-list",
+                       "Error in initializing a list frequency: only "
+                       "'string' and 'date' is implemented");
   mValue = value;
   pItems = items;
 }
@@ -29,7 +30,7 @@ template <typename T> Ti FrequencyList<T>::GetIndex() {
 
 template <typename T>
 std::unique_ptr<Frequency> FrequencyList<T>::Clone() const {
-  return std::unique_ptr<FrequencyList<T>>(new FrequencyList<T>(*this));
+  return std::make_unique<FrequencyList<T>>(*this);
 }
 
 template <typename T> void FrequencyList<T>::Next(Ti steps) {
@@ -108,7 +109,13 @@ void FrequencyList<T>::Parse0(const std::string &str,
       }
     }
   } catch (...) {
-    Rethrow("Parsing list frequency failed. Invalid format.");
+
+    try {
+      std::rethrow_exception(std::current_exception());
+    } catch (const std::exception &e) {
+      throw LdtException(ErrorType::kLogic, "freq-list",
+                         "Parsing list frequency failed. Invalid format.", &e);
+    }
   }
 }
 
@@ -128,8 +135,8 @@ std::string FrequencyList<T>::ToClassString(bool details) const {
   if constexpr (std::is_same<T, std::string>()) {
     if (details) {
       if (!pItems)
-        throw std::logic_error(
-            "FrequencyList:ToClassString:Inner list is null");
+        throw LdtException(ErrorType::kLogic, "freq-list",
+                           "FrequencyList:ToClassString:Inner list is null");
       std::function<std::string(std::string)> fun =
           [](std::string d) -> std::string { return d; };
       return std::string("Ls:") + Join(*pItems, std::string(";"), fun);
@@ -138,8 +145,8 @@ std::string FrequencyList<T>::ToClassString(bool details) const {
   } else if constexpr (std::is_same<T, boost::gregorian::date>()) {
     if (details) {
       if (!pItems)
-        throw std::logic_error(
-            "FrequencyList:ToClassString:Inner list is null");
+        throw LdtException(ErrorType::kLogic, "freq-list",
+                           "FrequencyList:ToClassString:Inner list is null");
       std::function<std::string(boost::gregorian::date)> fun =
           [](boost::gregorian::date d) -> std::string {
         return boost::gregorian::to_iso_string(d);
@@ -157,19 +164,20 @@ FrequencyList<T>::ParseList(const std::string &str, const std::string &classStr,
   fClass = GetClass(classStr);
 
   if constexpr (std::is_same<T, std::string>()) {
-    auto f = new FrequencyList<std::string>("", nullptr);
+    auto f = std::make_unique<FrequencyList<std::string>>("", nullptr);
     FrequencyList<std::string>::Parse0(str, classStr, fClass, *f, &items);
     f->pItems = &items;
-    return std::unique_ptr<FrequencyList<std::string>>(f);
+    return f;
   } else if constexpr (std::is_same<T, boost::gregorian::date>()) {
-    auto f = new FrequencyList<boost::gregorian::date>(boost::gregorian::date(),
-                                                       nullptr);
+    auto f = std::make_unique<FrequencyList<boost::gregorian::date>>(
+        boost::gregorian::date(), nullptr);
     FrequencyList<boost::gregorian::date>::Parse0(str, classStr, fClass, *f,
                                                   &items);
     f->pItems = &items;
-    return std::unique_ptr<FrequencyList<boost::gregorian::date>>(f);
+    return f;
   } else if constexpr (true) {
-    throw std::logic_error(
+    throw LdtException(
+        ErrorType::kLogic, "freq-list",
         "not implemented or invalid frequency class in 'ParseList'");
   }
 }

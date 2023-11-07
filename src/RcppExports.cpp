@@ -37,13 +37,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // ConvertTo_Weekly
-List ConvertTo_Weekly(SEXP w, const char* weekStart, SEXP aggregateFun);
+List ConvertTo_Weekly(SEXP w, std::string weekStart, SEXP aggregateFun);
 RcppExport SEXP _tdata_ConvertTo_Weekly(SEXP wSEXP, SEXP weekStartSEXP, SEXP aggregateFunSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type w(wSEXP);
-    Rcpp::traits::input_parameter< const char* >::type weekStart(weekStartSEXP);
+    Rcpp::traits::input_parameter< std::string >::type weekStart(weekStartSEXP);
     Rcpp::traits::input_parameter< SEXP >::type aggregateFun(aggregateFunSEXP);
     rcpp_result_gen = Rcpp::wrap(ConvertTo_Weekly(w, weekStart, aggregateFun));
     return rcpp_result_gen;
@@ -396,19 +396,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// Get_Descriptive
-NumericVector Get_Descriptive(NumericVector w, const char* type, bool skipNAN);
-RcppExport SEXP _tdata_Get_Descriptive(SEXP wSEXP, SEXP typeSEXP, SEXP skipNANSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type w(wSEXP);
-    Rcpp::traits::input_parameter< const char* >::type type(typeSEXP);
-    Rcpp::traits::input_parameter< bool >::type skipNAN(skipNANSEXP);
-    rcpp_result_gen = Rcpp::wrap(Get_Descriptive(w, type, skipNAN));
-    return rcpp_result_gen;
-END_RCPP
-}
 // Variable
 List Variable(SEXP data, SEXP name, SEXP startFrequency, SEXP fields);
 RcppExport SEXP _tdata_Variable(SEXP dataSEXP, SEXP nameSEXP, SEXP startFrequencySEXP, SEXP fieldsSEXP) {
@@ -482,7 +469,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_tdata_F_GetClass", (DL_FUNC) &_tdata_F_GetClass, 1},
     {"_tdata_F_Next", (DL_FUNC) &_tdata_F_Next, 2},
     {"_tdata_F_Minus", (DL_FUNC) &_tdata_F_Minus, 2},
-    {"_tdata_Get_Descriptive", (DL_FUNC) &_tdata_Get_Descriptive, 3},
     {"_tdata_Variable", (DL_FUNC) &_tdata_Variable, 4},
     {"_tdata_VariableToString", (DL_FUNC) &_tdata_VariableToString, 1},
     {"_tdata_BindVariables", (DL_FUNC) &_tdata_BindVariables, 5},
